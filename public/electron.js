@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 
 const path = require('path')
 const isDev = require('electron-is-dev')
@@ -28,4 +28,9 @@ function createPortalWindow () {
 app.on('ready', () => {
   const portalWindow = createPortalWindow()
   createMainWindow(portalWindow)
+
+  // redirect event from main window to portal window
+  ipcMain.on('portal-resource', (event, data) => {
+    portalWindow.webContents.send('portal-resource', data)
+  })
 })
