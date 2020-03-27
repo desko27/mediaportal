@@ -24,7 +24,8 @@
     "electron-is-dev": "1.1.0",
     "electron-log": "^3.0.8",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
     "concurrently": "4.1.2",

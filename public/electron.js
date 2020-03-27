@@ -5,7 +5,7 @@ const isDev = require('electron-is-dev')
 
 function getAppUrl (route) {
   return isDev
-    ? 'http://localhost:3000'
+    ? `http://localhost:3000/${route}`
     : `file://${path.join(__dirname, '../build/index.html')}`
 }
 
@@ -21,7 +21,7 @@ function createMainWindow (portalWindow) {
 
 function createPortalWindow () {
   const window = new BrowserWindow({ closable: false, width: 900, height: 680, webPreferences: { nodeIntegration: true } })
-  window.loadURL(getAppUrl('main'))
+  window.loadURL(getAppUrl('portal'))
   return window
 }
 
