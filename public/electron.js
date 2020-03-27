@@ -1,32 +1,31 @@
-const electron = require('electron')
-const app = electron.app
-const BrowserWindow = electron.BrowserWindow
+const { app, BrowserWindow } = require('electron')
 
 const path = require('path')
 const isDev = require('electron-is-dev')
 
-let mainWindow
-
-function createWindow () {
-  mainWindow = new BrowserWindow({ width: 900, height: 680, webPreferences: { nodeIntegration: true } })
-  mainWindow.loadURL(
-    isDev
-      ? 'http://localhost:3000'
-      : `file://${path.join(__dirname, '../build/index.html')}`
-  )
-  mainWindow.on('closed', () => (mainWindow = null))
+function getAppUrl (route) {
+  return isDev
+    ? 'http://localhost:3000'
+    : `file://${path.join(__dirname, '../build/index.html')}`
 }
 
-app.on('ready', createWindow)
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+function createMainWindow (portalWindow) {
+  const window = new BrowserWindow({ width: 350, height: 550, webPreferences: { nodeIntegration: true } })
+  window.loadURL(getAppUrl('main'))
+  window.on('closed', () => {
+    portalWindow.destroy()
     app.quit()
-  }
-})
+  })
+  return window
+}
 
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow()
-  }
+function createPortalWindow () {
+  const window = new BrowserWindow({ closable: false, width: 900, height: 680, webPreferences: { nodeIntegration: true } })
+  window.loadURL(getAppUrl('main'))
+  return window
+}
+
+app.on('ready', () => {
+  const portalWindow = createPortalWindow()
+  createMainWindow(portalWindow)
 })
