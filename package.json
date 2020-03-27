@@ -4,24 +4,6 @@
   "author": "desko27",
   "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "cross-env": "6.0.2",
-    "electron-is-dev": "1.1.0",
-    "electron-log": "^3.0.8",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "update-electron-app": "^1.2.0"
-  },
-  "devDependencies": {
-    "concurrently": "4.1.2",
-    "electron": "6.0.11",
-    "electron-builder": "^21.2.0",
-    "react-scripts": "3.1.2",
-    "standard": "^14.3.3",
-    "wait-on": "3.3.0"
-  },
-  "main": "public/electron.js",
-  "homepage": "./",
   "scripts": {
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
@@ -29,8 +11,32 @@
     "electron-build": "electron-builder",
     "release": "npm run react-build && electron-builder --publish=always",
     "build": "npm run react-build && npm run electron-build",
-    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\""
+    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "eslint": "npx standard"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run eslint"
+    }
+  },
+  "dependencies": {
+    "cross-env": "6.0.2",
+    "electron-is-dev": "1.1.0",
+    "electron-log": "^3.0.8",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "concurrently": "4.1.2",
+    "electron": "6.0.11",
+    "electron-builder": "^21.2.0",
+    "husky": "^4.2.3",
+    "react-scripts": "3.1.2",
+    "standard": "^14.3.3",
+    "wait-on": "3.3.0"
+  },
+  "main": "public/electron.js",
+  "homepage": "./",
   "browserslist": {
     "production": [
       ">0.2%",
