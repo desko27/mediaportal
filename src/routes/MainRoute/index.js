@@ -36,7 +36,7 @@ const MainRoute = () => {
                 className={cx(isSelected && 'is-selected')}
                 onClick={() => handleFileClick(file)}
               >
-                {isSelected && <>{<span>📍</span>}{' '}</>}
+                {isSelected && <>{<span role='img' aria-label='pin'>📍</span>}{' '}</>}
                 {name}
               </button>
             )

@@ -9,14 +9,16 @@ const webPreferences = {
   webSecurity: false
 }
 
+const commonWindowOptions = { webPreferences }
+
 function getAppUrl (route) {
   return isDev
-    ? `http://localhost:3000/${route}`
-    : `file://${path.join(__dirname, '../build/index.html')}`
+    ? `http://localhost:3000/#${route}`
+    : `file://${path.join(__dirname, '../build/index.html')}#/${route}`
 }
 
 function createMainWindow (portalWindow) {
-  const window = new BrowserWindow({ title: 'Media Portal', width: 350, height: 550, webPreferences })
+  const window = new BrowserWindow({ title: 'Media Portal', width: 350, height: 550, ...commonWindowOptions })
   window.loadURL(getAppUrl('main'))
   window.on('closed', () => {
     portalWindow.destroy()
@@ -26,7 +28,7 @@ function createMainWindow (portalWindow) {
 }
 
 function createPortalWindow () {
-  const window = new BrowserWindow({ title: 'Portal', closable: false, width: 900, height: 680, webPreferences })
+  const window = new BrowserWindow({ title: 'Portal', closable: false, width: 900, height: 680, ...commonWindowOptions })
   window.loadURL(getAppUrl('portal'))
   return window
 }

@@ -9,7 +9,6 @@
     "react-build": "react-scripts build",
     "react-eject": "react-scripts eject",
     "electron-build": "electron-builder",
-    "release": "npm run react-build && electron-builder --publish=always",
     "build": "npm run react-build && npm run electron-build",
     "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron . --allow-file-access-from-files\"",
     "eslint": "npx standard"
@@ -18,6 +17,14 @@
     "hooks": {
       "pre-commit": "npm run eslint"
     }
+  },
+  "build": {
+    "mac": {
+      "icon": "./build/icon.icns"
+    },
+    "files": [
+      "build/icon.*"
+    ]
   },
   "dependencies": {
     "classnames": "^2.2.6",
