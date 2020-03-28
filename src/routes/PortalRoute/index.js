@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import './index.css'
 
 const { ipcRenderer } = window.require('electron')
 
@@ -20,17 +21,17 @@ const PortalRoute = () => {
     }
   }, [currentFile])
 
-  if (!currentFile) return null
+  if (!currentFile) return <div className='portal' />
   const { name, type, path } = currentFile
   const webPath = `file://${encodeURI(path)}`
   console.log(webPath)
 
   return (
-    <div>
+    <div className='portal'>
       {type === 'image'
         ? <img src={webPath} alt={name} />
         : (
-          <video ref={videoRef} controls>
+          <video ref={videoRef}>
             <source src={webPath} />
           </video>
         )}

@@ -1,0 +1,13 @@
+.portal {
+  height: 100vh;
+  width: 100vw;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.portal > * {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+

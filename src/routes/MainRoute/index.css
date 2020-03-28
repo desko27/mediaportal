@@ -1,0 +1,45 @@
+.main {
+  background-color: #d3dfee;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  overflow-x: hidden;
+}
+
+.file-list {
+  flex-grow: 1;
+  display: flex;
+}
+
+.file-list .file-list-stack {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  border-radius: 10px;
+}
+.file-list.is-drag-active .file-list-stack {
+  background-color: #a6bad3;
+  border: 4px dashed #6483aa;
+  margin: 16px;
+  content: ''
+}
+
+.file-list .file-list-stack button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 10px 15px;
+  font-size: 18px;
+  text-align: left;
+  color: #363f55;
+  line-height: 1.3;
+}
+.file-list .file-list-stack button:hover {
+  background-color: #e2c51f !important;
+}
+.file-list .file-list-stack button:nth-child(even) {
+  background-color: #c3d0df;
+}
+.file-list.is-drag-active .file-list-stack button {
+  display: none;
+}

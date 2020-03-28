@@ -16,7 +16,7 @@ function getAppUrl (route) {
 }
 
 function createMainWindow (portalWindow) {
-  const window = new BrowserWindow({ width: 350, height: 550, webPreferences })
+  const window = new BrowserWindow({ title: 'Media Portal', width: 350, height: 550, webPreferences })
   window.loadURL(getAppUrl('main'))
   window.on('closed', () => {
     portalWindow.destroy()
@@ -26,7 +26,7 @@ function createMainWindow (portalWindow) {
 }
 
 function createPortalWindow () {
-  const window = new BrowserWindow({ closable: false, width: 900, height: 680, webPreferences })
+  const window = new BrowserWindow({ title: 'Portal', closable: false, width: 900, height: 680, webPreferences })
   window.loadURL(getAppUrl('portal'))
   return window
 }
