@@ -24,7 +24,6 @@ const PortalRoute = () => {
   if (!currentFile) return <div className='portal' />
   const { name, type, path } = currentFile
   const webPath = `file://${encodeURI(path)}`
-  console.log(webPath)
 
   return (
     <div className='portal'>
