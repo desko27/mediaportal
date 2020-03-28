@@ -4,8 +4,8 @@ const { ipcRenderer } = window.require('electron')
 
 const PortalRoute = () => {
   useEffect(() => {
-    const onPortalResource = (event, data) => {
-      window.alert(data.message)
+    const onPortalResource = (event, file) => {
+      window.alert(file.name)
     }
     ipcRenderer.on('portal-resource', onPortalResource)
     return () => ipcRenderer.removeListener('portal-resource', onPortalResource)
