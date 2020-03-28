@@ -14,7 +14,7 @@ const MainRoute = () => {
       const [type] = mimeType.split('/')
       return { name, path, type }
     })
-    setFileList(fileList)
+    setFileList(fileList.sort((a, b) => a.name.localeCompare(b.name)))
   }, [])
   const { getRootProps, isDragActive } = useDropzone({ onDrop: handleDrop })
 
