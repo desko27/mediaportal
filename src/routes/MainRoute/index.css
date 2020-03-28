@@ -34,11 +34,15 @@
   color: #363f55;
   line-height: 1.3;
 }
-.file-list .file-list-stack button:hover {
-  background-color: #e2c51f !important;
-}
 .file-list .file-list-stack button:nth-child(even) {
   background-color: #c3d0df;
+}
+.file-list .file-list-stack button:hover {
+  background-color: #e2c51f;
+}
+.file-list .file-list-stack button.is-selected {
+  background-color: #1f3ce2;
+  color: #fff;
 }
 .file-list.is-drag-active .file-list-stack button {
   display: none;

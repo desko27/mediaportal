@@ -7,6 +7,7 @@ const { ipcRenderer } = window.require('electron')
 
 const MainRoute = () => {
   const [fileList, setFileList] = useState([])
+  const [currentFile, setCurrentFile] = useState()
 
   const handleDrop = useCallback(files => {
     const fileList = files.map(({ name, path, type: mimeType }) => {
@@ -19,6 +20,7 @@ const MainRoute = () => {
 
   const handleFileClick = file => {
     ipcRenderer.send('portal-resource', file)
+    setCurrentFile(file)
   }
 
   return (
@@ -27,8 +29,14 @@ const MainRoute = () => {
         <div className='file-list-stack'>
           {fileList.map(file => {
             const { name, path } = file
+            const isSelected = currentFile && currentFile.path === path
             return (
-              <button key={path} onClick={() => handleFileClick(file)}>
+              <button
+                key={path}
+                className={cx(isSelected && 'is-selected')}
+                onClick={() => handleFileClick(file)}
+              >
+                {isSelected && <>{<span>📍</span>}{' '}</>}
                 {name}
               </button>
             )
