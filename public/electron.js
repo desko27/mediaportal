@@ -3,6 +3,12 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
 
+app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')
+const webPreferences = {
+  nodeIntegration: true,
+  webSecurity: false
+}
+
 function getAppUrl (route) {
   return isDev
     ? `http://localhost:3000/${route}`
@@ -10,7 +16,7 @@ function getAppUrl (route) {
 }
 
 function createMainWindow (portalWindow) {
-  const window = new BrowserWindow({ width: 350, height: 550, webPreferences: { nodeIntegration: true } })
+  const window = new BrowserWindow({ width: 350, height: 550, webPreferences })
   window.loadURL(getAppUrl('main'))
   window.on('closed', () => {
     portalWindow.destroy()
@@ -20,7 +26,7 @@ function createMainWindow (portalWindow) {
 }
 
 function createPortalWindow () {
-  const window = new BrowserWindow({ closable: false, width: 900, height: 680, webPreferences: { nodeIntegration: true } })
+  const window = new BrowserWindow({ closable: false, width: 900, height: 680, webPreferences })
   window.loadURL(getAppUrl('portal'))
   return window
 }
