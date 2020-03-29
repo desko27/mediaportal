@@ -21,7 +21,12 @@ function getAppUrl (route) {
 }
 
 function createMainWindow (portalWindow) {
-  const window = new BrowserWindow({ title: 'Media', width: 350, height: 550, ...commonWindowOptions })
+  const window = new BrowserWindow({
+    title: 'Media',
+    width: 350,
+    height: 550,
+    ...commonWindowOptions
+  })
   window.loadURL(getAppUrl('main'))
   window.on('closed', () => {
     portalWindow.destroy()
@@ -31,7 +36,14 @@ function createMainWindow (portalWindow) {
 }
 
 function createPortalWindow () {
-  const window = new BrowserWindow({ title: 'Portal', closable: false, width: 900, height: 680, ...commonWindowOptions })
+  const window = new BrowserWindow({
+    title: 'Portal',
+    width: 768,
+    height: 432,
+    closable: false,
+    maximizable: process.platform === 'darwin',
+    ...commonWindowOptions
+  })
   window.loadURL(getAppUrl('portal'))
   return window
 }
@@ -39,6 +51,12 @@ function createPortalWindow () {
 app.on('ready', () => {
   const portalWindow = createPortalWindow()
   const mainWindow = createMainWindow(portalWindow)
+
+  ipcMain.on('portal-fullscreen', (event, value) => {
+    const newValue = value === 'toggle' ? !portalWindow.isFullScreen() : value
+    portalWindow.setFullScreen(newValue)
+    setTimeout(() => !newValue && portalWindow.unmaximize(), 100)
+  })
 
   // only show when react render is ready
   ipcMain.once('portal-window-ready', () => portalWindow.show())
