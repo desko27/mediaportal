@@ -20,7 +20,8 @@
   },
   "build": {
     "mac": {
-      "icon": "./build/icon.icns"
+      "icon": "./build/icon.icns",
+      "target": "dmg"
     },
     "win": {
       "icon": "./build/icon.png",
