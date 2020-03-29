@@ -9,7 +9,7 @@ const webPreferences = {
   webSecurity: false
 }
 
-const commonWindowOptions = { webPreferences }
+const commonWindowOptions = { webPreferences, show: false }
 
 function getAppUrl (route) {
   return isDev
@@ -35,7 +35,11 @@ function createPortalWindow () {
 
 app.on('ready', () => {
   const portalWindow = createPortalWindow()
-  createMainWindow(portalWindow)
+  const mainWindow = createMainWindow(portalWindow)
+
+  // only show when react render is ready
+  ipcMain.once('portal-window-ready', () => portalWindow.show())
+  ipcMain.once('main-window-ready', () => mainWindow.show())
 
   // redirect event from main window to portal window
   ipcMain.on('portal-resource', (event, data) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import './index.css'
 
 const { ipcRenderer } = window.require('electron')
@@ -6,6 +6,11 @@ const { ipcRenderer } = window.require('electron')
 const PortalRoute = () => {
   const [currentFile, setCurrentFile] = useState()
   const videoRef = useRef()
+
+  useLayoutEffect(() => {
+    // show window when mounted
+    ipcRenderer.send('portal-window-ready')
+  }, [])
 
   useEffect(() => {
     const onPortalResource = (event, file) => setCurrentFile(file)

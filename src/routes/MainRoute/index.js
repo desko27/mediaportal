@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useLayoutEffect, useState } from 'react'
 import cx from 'classnames'
 import { useDropzone } from 'react-dropzone'
 import './index.css'
@@ -8,6 +8,11 @@ const { ipcRenderer } = window.require('electron')
 const MainRoute = () => {
   const [fileList, setFileList] = useState([])
   const [currentFile, setCurrentFile] = useState()
+
+  useLayoutEffect(() => {
+    // show window when mounted
+    ipcRenderer.send('main-window-ready')
+  }, [])
 
   const handleDrop = useCallback(files => {
     const fileList = files.map(({ name, path, type: mimeType }) => {
