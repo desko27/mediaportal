@@ -8,7 +8,7 @@
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
     "react-eject": "react-scripts eject",
-    "electron-build": "electron-builder",
+    "electron-build": "electron-builder --mac --win",
     "build": "npm run react-build && npm run electron-build",
     "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron . --allow-file-access-from-files\"",
     "eslint": "npx standard"
@@ -21,6 +21,17 @@
   "build": {
     "mac": {
       "icon": "./build/icon.icns"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
     },
     "files": [
       "build/icon.*"
@@ -39,7 +50,7 @@
   "devDependencies": {
     "concurrently": "4.1.2",
     "electron": "6.0.11",
-    "electron-builder": "^21.2.0",
+    "electron-builder": "^22.4.1",
     "husky": "^4.2.3",
     "react-scripts": "3.1.2",
     "standard": "^14.3.3",
