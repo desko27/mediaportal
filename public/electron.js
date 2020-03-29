@@ -1,7 +1,10 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, Menu } = require('electron')
 
 const path = require('path')
 const isDev = require('electron-is-dev')
+
+// remove browser's menu bar for production env
+if (!isDev) Menu.setApplicationMenu(false)
 
 const webPreferences = {
   nodeIntegration: true,
