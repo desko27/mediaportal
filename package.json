@@ -23,6 +23,7 @@
       "icon": "./build/icon.icns"
     },
     "win": {
+      "icon": "./build/icon.png",
       "target": [
         {
           "target": "nsis",

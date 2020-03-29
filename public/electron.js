@@ -18,7 +18,7 @@ function getAppUrl (route) {
 }
 
 function createMainWindow (portalWindow) {
-  const window = new BrowserWindow({ title: 'Media Portal', width: 350, height: 550, ...commonWindowOptions })
+  const window = new BrowserWindow({ title: 'Media', width: 350, height: 550, ...commonWindowOptions })
   window.loadURL(getAppUrl('main'))
   window.on('closed', () => {
     portalWindow.destroy()
