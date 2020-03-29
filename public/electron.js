@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain, Menu } = require('electron')
-
 const path = require('path')
 const isDev = require('electron-is-dev')
+const { version } = require('../package.json')
 
 // remove browser's menu bar for production env
 if (!isDev) Menu.setApplicationMenu(false)
@@ -22,7 +22,7 @@ function getAppUrl (route) {
 
 function createMainWindow (portalWindow) {
   const window = new BrowserWindow({
-    title: 'Media',
+    title: `Media Portal v${version}`,
     width: 350,
     height: 550,
     ...commonWindowOptions
