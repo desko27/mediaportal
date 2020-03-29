@@ -3,10 +3,10 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
 
-app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')
 const webPreferences = {
   nodeIntegration: true,
-  webSecurity: false
+  webSecurity: false,
+  autoplayPolicy: 'no-user-gesture-required'
 }
 
 const commonWindowOptions = { webPreferences, show: false }
