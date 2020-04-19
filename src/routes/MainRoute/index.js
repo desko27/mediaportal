@@ -1,6 +1,9 @@
-import React, { useCallback, useLayoutEffect, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import cx from 'classnames'
 import { useDropzone } from 'react-dropzone'
+
+import VideoControls from '../../components/VideoControls'
+
 import './index.css'
 
 const { ipcRenderer } = window.require('electron')
@@ -8,10 +11,19 @@ const { ipcRenderer } = window.require('electron')
 const MainRoute = () => {
   const [fileList, setFileList] = useState([])
   const [currentFile, setCurrentFile] = useState()
+  const [videoElapsedTimePercent, setVideoElapsedTimePercent] = useState(0)
 
   useLayoutEffect(() => {
     // show window when mounted
     ipcRenderer.send('main-window-ready')
+  }, [])
+
+  useEffect(() => {
+    const elapsedTimeListener = (event, percent) => setVideoElapsedTimePercent(percent)
+    ipcRenderer.on('portal-video-elapsed-time-percent-update', elapsedTimeListener)
+    return () => {
+      ipcRenderer.removeListener('portal-video-action', elapsedTimeListener)
+    }
   }, [])
 
   const handleDrop = useCallback(files => {
@@ -48,6 +60,12 @@ const MainRoute = () => {
           })}
         </div>
       </div>
+      <VideoControls
+        elapsedTime={videoElapsedTimePercent}
+        videoAction={(type, ...args) => {
+          ipcRenderer.send('portal-video-action', { type, args })
+        }}
+      />
     </div>
   )
 }

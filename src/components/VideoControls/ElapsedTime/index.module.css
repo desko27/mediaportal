@@ -1,0 +1,15 @@
+.wrapper {
+  position: relative;
+  background-color: #fff;
+  height: 80%;
+}
+
+.wrapper::after {
+  content: '';
+  background-color: #777;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: var(--right);
+}

@@ -66,4 +66,14 @@ app.on('ready', () => {
   ipcMain.on('portal-resource', (event, data) => {
     portalWindow.webContents.send('portal-resource', data)
   })
+
+  // redirect video actions from main window to portal window
+  ipcMain.on('portal-video-action', (event, data) => {
+    portalWindow.webContents.send('portal-video-action', data)
+  })
+
+  // redirect elapsed time percent update from portal window to main window
+  ipcMain.on('portal-video-elapsed-time-percent-update', (event, data) => {
+    mainWindow.webContents.send('portal-video-elapsed-time-percent-update', data)
+  })
 })
