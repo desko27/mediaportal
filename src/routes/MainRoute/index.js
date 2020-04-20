@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import cx from 'classnames'
 import { useDropzone } from 'react-dropzone'
 
+import Header from '../../components/Header'
 import VideoControls from '../../components/VideoControls'
 
 import './index.css'
@@ -42,6 +43,7 @@ const MainRoute = () => {
 
   return (
     <div className='main'>
+      <Header filesNumber={fileList.length} />
       <div {...getRootProps({ className: cx('file-list', isDragActive && 'is-drag-active') })}>
         <div className='file-list-stack'>
           {fileList.map(file => {
