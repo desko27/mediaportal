@@ -1,21 +1,29 @@
 import React from 'react'
 
-import ElapsedTime from './ElapsedTime'
+import ElapsedTimeBar from './ElapsedTimeBar'
 
 import styles from './index.module.css'
 
-const VideoControls = ({ videoAction, elapsedTime }) => {
-  const handleElapsedTimeClick = ({ wantedProgress }) => {
-    videoAction('setElapsedTimePercent', wantedProgress)
+const VideoControls = ({ sendAction, video }) => {
+  if (!video) {
+    return (
+      <div className={styles.wrapper}>
+        No video selected
+      </div>
+    )
+  }
+
+  const handleElapsedTimeClick = ({ wantedRatio }) => {
+    sendAction('setElapsedRatio', wantedRatio)
   }
 
   return (
     <div className={styles.wrapper}>
-      <button onClick={() => videoAction('play')}>▶️</button>
-      <button onClick={() => videoAction('pause')}>⏸</button>
-      <ElapsedTime
-        className={styles.elapsedTime}
-        progress={elapsedTime}
+      <button onClick={() => sendAction('play')}>▶️</button>
+      <button onClick={() => sendAction('pause')}>⏸</button>
+      <ElapsedTimeBar
+        className={styles.elapsedTimeBar}
+        elapsedRatio={video.elapsedRatio}
         onClick={handleElapsedTimeClick}
       />
     </div>

@@ -26,9 +26,9 @@ const PortalRoute = () => {
       const { type, args } = action
 
       // special managed actions
-      if (type === 'setElapsedTimePercent') {
-        const [wantedPercent] = args
-        video.currentTime = (wantedPercent * video.duration) / 100
+      if (type === 'setElapsedRatio') {
+        const [wantedRatio] = args
+        video.currentTime = wantedRatio * video.duration
         return
       }
 
@@ -37,12 +37,12 @@ const PortalRoute = () => {
     }
 
     ipcRenderer.on('portal-resource', handlePortalResource)
-    ipcRenderer.on('portal-video-action', handleVideoAction)
+    ipcRenderer.on('portal-action', handleVideoAction)
     document.addEventListener('keydown', handleKeydown)
 
     return () => {
       ipcRenderer.removeListener('portal-resource', handlePortalResource)
-      ipcRenderer.removeListener('portal-video-action', handleVideoAction)
+      ipcRenderer.removeListener('portal-action', handleVideoAction)
       document.removeEventListener('keydown', handleKeydown)
     }
   }, [])
@@ -51,10 +51,19 @@ const PortalRoute = () => {
     if (!currentFile) return
     if (currentFile.type === 'video') {
       const video = videoRef.current
+      const elapsedTime = video.currentTime
+      const elapsedRatio = video.currentTime / video.duration
+
       const timeupdateListener = () => {
         ipcRenderer.send(
-          'portal-video-elapsed-time-percent-update',
-          (video.currentTime / video.duration) * 100
+          'portal-state-update',
+          {
+            video: {
+              elapsedTime,
+              elapsedRatio,
+              isPaused: video.paused
+            }
+          }
         )
       }
       video.addEventListener('timeupdate', timeupdateListener)

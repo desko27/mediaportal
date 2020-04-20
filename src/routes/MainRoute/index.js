@@ -11,7 +11,7 @@ const { ipcRenderer } = window.require('electron')
 const MainRoute = () => {
   const [fileList, setFileList] = useState([])
   const [currentFile, setCurrentFile] = useState()
-  const [videoElapsedTimePercent, setVideoElapsedTimePercent] = useState(0)
+  const [portalState, setPortalState] = useState({})
 
   useLayoutEffect(() => {
     // show window when mounted
@@ -19,10 +19,10 @@ const MainRoute = () => {
   }, [])
 
   useEffect(() => {
-    const elapsedTimeListener = (event, percent) => setVideoElapsedTimePercent(percent)
-    ipcRenderer.on('portal-video-elapsed-time-percent-update', elapsedTimeListener)
+    const portalStateListener = (event, state) => setPortalState(state)
+    ipcRenderer.on('portal-state-update', portalStateListener)
     return () => {
-      ipcRenderer.removeListener('portal-video-action', elapsedTimeListener)
+      ipcRenderer.removeListener('portal-state-update', portalStateListener)
     }
   }, [])
 
@@ -61,9 +61,9 @@ const MainRoute = () => {
         </div>
       </div>
       <VideoControls
-        elapsedTime={videoElapsedTimePercent}
-        videoAction={(type, ...args) => {
-          ipcRenderer.send('portal-video-action', { type, args })
+        video={portalState.video}
+        sendAction={(type, ...args) => {
+          ipcRenderer.send('portal-action', { type, args })
         }}
       />
     </div>

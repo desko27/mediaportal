@@ -62,18 +62,18 @@ app.on('ready', () => {
   ipcMain.once('portal-window-ready', () => portalWindow.show())
   ipcMain.once('main-window-ready', () => mainWindow.show())
 
-  // redirect event from main window to portal window
+  // redirect resource event from main window to portal window
   ipcMain.on('portal-resource', (event, data) => {
     portalWindow.webContents.send('portal-resource', data)
   })
 
-  // redirect video actions from main window to portal window
-  ipcMain.on('portal-video-action', (event, data) => {
-    portalWindow.webContents.send('portal-video-action', data)
+  // redirect actions from main window to portal window
+  ipcMain.on('portal-action', (event, data) => {
+    portalWindow.webContents.send('portal-action', data)
   })
 
-  // redirect elapsed time percent update from portal window to main window
-  ipcMain.on('portal-video-elapsed-time-percent-update', (event, data) => {
-    mainWindow.webContents.send('portal-video-elapsed-time-percent-update', data)
+  // redirect portal state update from portal window to main window
+  ipcMain.on('portal-state-update', (event, data) => {
+    mainWindow.webContents.send('portal-state-update', data)
   })
 })

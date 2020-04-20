@@ -3,25 +3,25 @@ import cx from 'classnames'
 
 import styles from './index.module.css'
 
-const ElapsedTime = ({ className, progress = 50, onClick }) => {
+const ElapsedTimeBar = ({ className, elapsedRatio = 0, onClick }) => {
   const ref = useRef()
 
   const handleClick = e => {
     const elementWidth = ref.current.offsetWidth
     const elementX = ref.current.offsetLeft
     const mouseX = e.clientX
-    const wantedProgress = ((mouseX - elementX) / elementWidth) * 100
-    onClick({ wantedProgress })
+    const wantedRatio = (mouseX - elementX) / elementWidth
+    onClick({ wantedRatio })
   }
 
   return (
     <div
       ref={ref}
-      style={{ '--right': `${100 - progress}%` }}
+      style={{ '--right': `${(1 - elapsedRatio) * 100}%` }}
       className={cx(styles.wrapper, className)}
       onClick={handleClick}
     />
   )
 }
 
-export default ElapsedTime
+export default ElapsedTimeBar

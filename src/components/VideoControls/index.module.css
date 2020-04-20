@@ -20,6 +20,6 @@
   justify-content: center;
 }
 
-.elapsedTime {
+.elapsedTimeBar {
   flex-grow: 1;
 }
