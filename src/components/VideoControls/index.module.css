@@ -1,23 +1,25 @@
 .wrapper {
-  background-color: #28282b;
-  display: flex;
-  align-items: center;
-  padding: 12px;
-}
-.wrapper * + * {
-  margin-left: 12px;
-}
-
-.wrapper button {
-  background-color: #eeedc9;
-  border: none;
-  font-size: 20px;
-  width: 37px;
-  height: 37px;
-  border-radius: 20px;
+  color: var(--c-white);
+  background-color: var(--c-black);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 12px;
+  font-family: monospace;
+  font-weight: 700;
+  height: 36px;
+}
+.wrapper * + * {
+  margin-left: 10px;
+}
+
+.playToggle {
+  line-height: 0;
+  width: 16px;
+  padding: 0;
+  color: var(--c-white);
+  background-color: transparent;
+  border: none;
 }
 
 .elapsedTimeBar {

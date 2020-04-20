@@ -3,7 +3,7 @@ import cx from 'classnames'
 
 import styles from './index.module.css'
 
-const ElapsedTimeBar = ({ className, elapsedRatio = 0, onClick }) => {
+const ElapsedTimeBar = ({ className, elapsedRatio = 0, isPaused, onClick }) => {
   const ref = useRef()
 
   const handleClick = e => {
@@ -18,7 +18,7 @@ const ElapsedTimeBar = ({ className, elapsedRatio = 0, onClick }) => {
     <div
       ref={ref}
       style={{ '--right': `${(1 - elapsedRatio) * 100}%` }}
-      className={cx(styles.wrapper, className)}
+      className={cx(styles.wrapper, className, isPaused && styles.isPaused)}
       onClick={handleClick}
     />
   )
