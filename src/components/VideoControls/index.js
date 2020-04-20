@@ -4,6 +4,12 @@ import ElapsedTimeBar from './ElapsedTimeBar'
 
 import styles from './index.module.css'
 
+const getMinutesString = seconds => {
+  const minutes = Math.floor(seconds / 60)
+  const restOfSeconds = `${Math.floor(seconds % 60)}`.padStart(2, '0')
+  return `${minutes}:${restOfSeconds}`
+}
+
 const VideoControls = ({ sendAction, video }) => {
   if (!video) {
     return (
@@ -26,6 +32,7 @@ const VideoControls = ({ sendAction, video }) => {
         elapsedRatio={video.elapsedRatio}
         onClick={handleElapsedTimeClick}
       />
+      <span>{getMinutesString(video.elapsedTime)}</span>
     </div>
   )
 }

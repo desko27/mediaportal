@@ -51,10 +51,12 @@ const PortalRoute = () => {
     if (!currentFile) return
     if (currentFile.type === 'video') {
       const video = videoRef.current
-      const elapsedTime = video.currentTime
-      const elapsedRatio = video.currentTime / video.duration
 
       const timeupdateListener = () => {
+        const elapsedTime = video.currentTime
+        const elapsedRatioCalc = video.currentTime / video.duration
+        const elapsedRatio = isNaN(elapsedRatioCalc) ? 0 : elapsedRatioCalc
+
         ipcRenderer.send(
           'portal-state-update',
           {
