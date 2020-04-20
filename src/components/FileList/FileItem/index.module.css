@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+.wrapper.isSelected {
+  background-color: var(--c-primary-light);
+}
+
+.fileState {
+  width: 20px;
+  margin: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.fileButton {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  text-align: left;
+  flex-grow: 1;
+  font-size: 18px;
+  height: 35px;
+}
+.isSelected .fileButton {
+  color: var(--c-primary);
+}
