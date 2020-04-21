@@ -32,10 +32,14 @@
 .isChecked:not(.isSelected) .fileState svg * {
   stroke: var(--c-success);
 }
+.isChecked.willRemoveChecks:not(.isSelected) .fileState svg * {
+  stroke: var(--c-error);
+}
 .isFileStateHover:not(.isSelected):not(.isChecked) .fileState svg * {
   stroke: var(--c-gray);
 }
-.isFileStateHover.isSelected .fileState svg * {
+.isFileStateHover.isSelected .fileState svg *,
+.isFileStateHover.isChecked .fileState svg * {
   stroke: var(--c-error);
 }
 .isFileButtonHover:not(.isSelected) .fileState svg * {

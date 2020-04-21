@@ -19,3 +19,6 @@
   justify-content: center;
   align-items: center;
 }
+.removeChecksButton:hover svg * {
+  stroke: var(--c-error);
+}

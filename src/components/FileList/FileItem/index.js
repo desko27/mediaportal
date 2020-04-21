@@ -8,7 +8,14 @@ import { ReactComponent as CheckIcon } from './icons/check.svg'
 
 import styles from './index.module.css'
 
-const FileItem = ({ file, isSelected, isChecked, onFileClick, onStateClick }) => {
+const FileItem = ({
+  file,
+  isChecked,
+  isSelected,
+  onFileClick,
+  onStateClick,
+  willRemoveChecks
+}) => {
   const [isFileButtonHover, setIsFileButtonHover] = useState()
   const [isFileStateHover, setIsFileStateHover] = useState()
   const { id, name, type } = file
@@ -25,7 +32,8 @@ const FileItem = ({ file, isSelected, isChecked, onFileClick, onStateClick }) =>
         isSelected && styles.isSelected,
         isChecked && styles.isChecked,
         isFileButtonHover && styles.isFileButtonHover,
-        isFileStateHover && styles.isFileStateHover
+        isFileStateHover && styles.isFileStateHover,
+        willRemoveChecks && styles.willRemoveChecks
       )}
     >
       <button

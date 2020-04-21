@@ -13,6 +13,7 @@ const MainRoute = () => {
   const [checkedFiles, setCheckedFiles] = useState([])
   const [currentFile, setCurrentFile] = useState()
   const [portalState, setPortalState] = useState({})
+  const [willRemoveChecks, setWillRemoveChecks] = useState()
 
   useLayoutEffect(() => {
     // show window when mounted
@@ -75,9 +76,8 @@ const MainRoute = () => {
     })
   }
 
-  const handleRemoveChecksClick = () => {
-    setCheckedFiles([])
-  }
+  const handleRemoveChecksClick = () => setCheckedFiles([])
+  const handleRemoveChecksHover = isHover => setWillRemoveChecks(isHover)
 
   return (
     <div className={styles.wrapper}>
@@ -85,6 +85,7 @@ const MainRoute = () => {
         className={styles.header}
         filesNumber={fileList.length}
         onRemoveChecksClick={handleRemoveChecksClick}
+        onRemoveChecksHover={handleRemoveChecksHover}
       />
       <FileList
         checkedFiles={checkedFiles}
@@ -94,6 +95,7 @@ const MainRoute = () => {
         onDropFiles={handleDropFiles}
         onFileClick={handleFileClick}
         onStateClick={handleStateClick}
+        willRemoveChecks={willRemoveChecks}
       />
       <MediaControls
         className={styles.mediaControls}

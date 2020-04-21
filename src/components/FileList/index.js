@@ -12,7 +12,8 @@ const FileList = ({
   fileList,
   onFileClick,
   onStateClick,
-  onDropFiles
+  onDropFiles,
+  willRemoveChecks
 }) => {
   const { getRootProps, isDragActive } = useDropzone({ onDrop: onDropFiles })
 
@@ -31,6 +32,7 @@ const FileList = ({
                 onFileClick={onFileClick}
                 onStateClick={onStateClick}
                 isChecked={isChecked}
+                willRemoveChecks={willRemoveChecks}
               />
             )
           })}
