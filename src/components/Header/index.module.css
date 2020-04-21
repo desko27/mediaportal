@@ -11,6 +11,7 @@
 }
 
 .removeChecksButton {
+  color: var(--c-gray-semi-dark);
   padding: 7px;
   border: none;
   background-color: transparent;
@@ -19,6 +20,6 @@
   justify-content: center;
   align-items: center;
 }
-.removeChecksButton:hover svg * {
-  stroke: var(--c-error);
+.removeChecksButton:hover {
+  color: var(--c-error);
 }

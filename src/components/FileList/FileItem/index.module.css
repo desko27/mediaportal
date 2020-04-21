@@ -26,24 +26,24 @@
   justify-content: center;
   line-height: 1;
 }
-.fileState svg * {
-  stroke: var(--c-primary);
+.fileState {
+  color: var(--c-primary);
 }
-.isChecked:not(.isSelected) .fileState svg * {
-  stroke: var(--c-success);
+.isChecked:not(.isSelected) .fileState {
+  color: var(--c-success);
 }
-.isChecked.willRemoveChecks:not(.isSelected) .fileState svg * {
-  stroke: var(--c-error);
+.isChecked.willRemoveChecks:not(.isSelected) .fileState {
+  color: var(--c-error);
 }
-.isFileStateHover:not(.isSelected):not(.isChecked) .fileState svg * {
-  stroke: var(--c-gray);
+.isFileStateHover:not(.isSelected):not(.isChecked) .fileState {
+  color: var(--c-gray);
 }
-.isFileStateHover.isSelected .fileState svg *,
-.isFileStateHover.isChecked .fileState svg * {
-  stroke: var(--c-error);
+.isFileStateHover.isSelected .fileState,
+.isFileStateHover.isChecked .fileState {
+  color: var(--c-error);
 }
-.isFileButtonHover:not(.isSelected) .fileState svg * {
-  stroke: var(--c-local-gray);
+.isFileButtonHover:not(.isSelected) .fileState {
+  color: var(--c-local-gray);
 }
 
 .fileButton {
@@ -67,8 +67,8 @@
   line-height: 0;
   margin-right: 12px;
 }
-.fileButtonType svg * {
-  stroke: var(--c-local-gray);
+.fileButtonType {
+  color: var(--c-local-gray);
 }
 
 .fileButtonText {
