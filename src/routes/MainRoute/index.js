@@ -27,6 +27,16 @@ const MainRoute = () => {
     }
   }, [])
 
+  const handleDropFiles = files => {
+    const fileList = files.map(({ name, path, type: mimeType }) => {
+      const [type] = mimeType.split('/')
+      return { id: path, name, path, type }
+    })
+    const sortedFileList = fileList.sort((a, b) => a.name.localeCompare(b.name))
+    setCheckedFiles([])
+    setFileList(sortedFileList)
+  }
+
   const sendAction = (type, ...args) => {
     ipcRenderer.send('portal-action', { type, args })
   }
@@ -66,19 +76,18 @@ const MainRoute = () => {
         filesNumber={fileList.length}
       />
       <FileList
-        className={styles.fileList}
-        fileList={fileList}
-        setFileList={setFileList}
         checkedFiles={checkedFiles}
-        setCheckedFiles={setCheckedFiles}
+        className={styles.fileList}
+        currentFile={currentFile}
+        fileList={fileList}
+        onDropFiles={handleDropFiles}
         onFileClick={handleFileClick}
         onStateClick={handleStateClick}
-        currentFile={currentFile}
       />
       <MediaControls
         className={styles.mediaControls}
-        video={portalState.video}
         sendAction={sendAction}
+        video={portalState.video}
       />
     </div>
   )

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import cx from 'classnames'
 import { useDropzone } from 'react-dropzone'
 
@@ -12,19 +12,9 @@ const FileList = ({
   fileList,
   onFileClick,
   onStateClick,
-  setCheckedFiles,
-  setFileList
+  onDropFiles
 }) => {
-  const handleDrop = useCallback(files => {
-    const fileList = files.map(({ name, path, type: mimeType }) => {
-      const [type] = mimeType.split('/')
-      return { id: path, name, path, type }
-    })
-    const sortedFileList = fileList.sort((a, b) => a.name.localeCompare(b.name))
-    setCheckedFiles([])
-    setFileList(sortedFileList)
-  }, [])
-  const { getRootProps, isDragActive } = useDropzone({ onDrop: handleDrop })
+  const { getRootProps, isDragActive } = useDropzone({ onDrop: onDropFiles })
 
   return (
     <div {...getRootProps({ className: cx(styles.wrapper, className, isDragActive && styles.draggingPlaceholder) })}>
