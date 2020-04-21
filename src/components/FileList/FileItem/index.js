@@ -17,9 +17,9 @@ const FileItem = ({ file, isSelected, onFileClick }) => {
 
   return (
     <div className={cx(styles.wrapper, isSelected && styles.isSelected)}>
-      <div className={styles.fileState}>
+      <button className={styles.fileState}>
         {isSelected && <RadioIcon />}
-      </div>
+      </button>
       <button
         key={path}
         className={styles.fileButton}

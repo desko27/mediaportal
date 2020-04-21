@@ -9,9 +9,14 @@
 }
 
 .fileState {
+  border: 0;
+  background-color: transparent;
+  height: 35px;
+  width: calc(22px + 2 * 7px);
+  padding: 0 7px;
+  margin: 0 7px;
+
   flex-shrink: 0;
-  width: 22px;
-  margin: 0 14px;
   display: flex;
   align-items: center;
   justify-content: center;
