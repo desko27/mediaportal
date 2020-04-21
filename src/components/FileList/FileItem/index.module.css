@@ -1,8 +1,10 @@
 .wrapper {
+  --c-local-gray: var(--c-gray);
   display: flex;
   align-items: center;
 }
 .wrapper.isSelected {
+  --c-local-gray: var(--c-primary-gray);
   background-color: var(--c-primary-light);
 }
 
@@ -41,14 +43,14 @@
   margin-right: 12px;
 }
 .fileButtonType svg * {
-  stroke: var(--c-gray);
-}
-.isSelected .fileButtonType svg * {
-  stroke: var(--c-primary-gray);
+  stroke: var(--c-local-gray);
 }
 
 .fileButtonText {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.fileButtonTextExtension {
+  color: var(--c-local-gray);
 }

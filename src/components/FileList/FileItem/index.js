@@ -9,6 +9,12 @@ import styles from './index.module.css'
 
 const FileItem = ({ file, isSelected, onFileClick }) => {
   const { name, path, type } = file
+
+  const dotSplitedName = name.split('.')
+  const hasExtension = dotSplitedName.length > 1
+  const [extension] = hasExtension && dotSplitedName.slice(-1)
+  const baseName = hasExtension ? dotSplitedName.slice(0, -1).join('.') : name
+
   return (
     <div className={cx(styles.wrapper, isSelected && styles.isSelected)}>
       <div className={styles.fileState}>
@@ -23,7 +29,9 @@ const FileItem = ({ file, isSelected, onFileClick }) => {
           {type === 'video' ? <FilmIcon /> : <ImageIcon />}
         </span>
         <span className={styles.fileButtonText}>
-          {name}
+          <span>{baseName}</span>
+          {extension &&
+            <span className={styles.fileButtonTextExtension}>.{extension}</span>}
         </span>
       </button>
     </div>
