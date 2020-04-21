@@ -6,6 +6,9 @@
 
   /* no touch feedback box for an app-ish feeling */
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  /* no default user select allowed for an app-ish feeling */
+  user-select: none;
 }
 
 body {

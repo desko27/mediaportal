@@ -7,15 +7,21 @@
 }
 
 .fileState {
-  width: 20px;
+  flex-shrink: 0;
+  width: 22px;
   margin: 0 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
 }
+.fileState svg * {
+  stroke: var(--c-primary);
+}
 
 .fileButton {
+  display: flex;
+  align-items: center;
   background-color: transparent;
   padding: 0;
   border: none;
@@ -23,7 +29,26 @@
   flex-grow: 1;
   font-size: 18px;
   height: 35px;
+  padding-right: 14px;
+  overflow: hidden;
 }
 .isSelected .fileButton {
   color: var(--c-primary);
+}
+
+.fileButtonType {
+  line-height: 0;
+  margin-right: 12px;
+}
+.fileButtonType svg * {
+  stroke: var(--c-gray);
+}
+.isSelected .fileButtonType svg * {
+  stroke: var(--c-primary-gray);
+}
+
+.fileButtonText {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
