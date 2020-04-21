@@ -10,6 +10,7 @@ const { ipcRenderer } = window.require('electron')
 
 const MainRoute = () => {
   const [fileList, setFileList] = useState([])
+  const [checkedFiles, setCheckedFiles] = useState([])
   const [currentFile, setCurrentFile] = useState()
   const [portalState, setPortalState] = useState({})
 
@@ -26,9 +27,30 @@ const MainRoute = () => {
     }
   }, [])
 
+  const sendAction = (type, ...args) => {
+    ipcRenderer.send('portal-action', { type, args })
+  }
+
   const handleFileClick = file => {
     ipcRenderer.send('portal-resource', file)
     setCurrentFile(file)
+  }
+
+  const handleStateClick = file => {
+    const { id } = file
+    const isCurrent = currentFile && currentFile.id === id
+
+    if (isCurrent) {
+      ipcRenderer.send('portal-resource', undefined)
+      setCurrentFile(undefined)
+      return
+    }
+
+    const isChecked = checkedFiles.includes(id)
+    setCheckedFiles(prev => {
+      if (!isChecked) return [...prev, id]
+      return prev.filter(checkedId => checkedId !== id)
+    })
   }
 
   return (
@@ -41,15 +63,16 @@ const MainRoute = () => {
         className={styles.fileList}
         fileList={fileList}
         setFileList={setFileList}
+        checkedFiles={checkedFiles}
+        setCheckedFiles={setCheckedFiles}
         onFileClick={handleFileClick}
+        onStateClick={handleStateClick}
         currentFile={currentFile}
       />
       <MediaControls
         className={styles.mediaControls}
         video={portalState.video}
-        sendAction={(type, ...args) => {
-          ipcRenderer.send('portal-action', { type, args })
-        }}
+        sendAction={sendAction}
       />
     </div>
   )

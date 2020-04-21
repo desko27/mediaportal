@@ -25,6 +25,9 @@
 .fileState svg * {
   stroke: var(--c-primary);
 }
+.isChecked:not(.isSelected) .fileState svg * {
+  stroke: var(--c-success);
+}
 
 .fileButton {
   display: flex;

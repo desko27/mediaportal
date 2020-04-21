@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="13px" viewBox="0 0 18 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>check</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Main" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Normal" transform="translate(-16.000000, -94.000000)" stroke="#5DA271" stroke-width="2">
+            <g id="Files-List" transform="translate(0.000000, 54.000000)">
+                <g id="File-Image" transform="translate(17.000000, 36.000000)">
+                    <g id="check" transform="translate(0.000000, 5.000000)">
+                        <polyline id="Path" points="16 0 5 11 0 6"></polyline>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

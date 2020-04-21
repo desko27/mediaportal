@@ -16,6 +16,12 @@ const PortalRoute = () => {
 
   useEffect(() => {
     const handlePortalResource = (event, file) => {
+      if (!file) {
+        setCurrentFile(undefined)
+        ipcRenderer.send('portal-state-update', {})
+        return
+      }
+
       setCurrentFile(file)
       ipcRenderer.send(
         'portal-state-update',

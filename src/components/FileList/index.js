@@ -5,13 +5,24 @@ import { useDropzone } from 'react-dropzone'
 import FileItem from './FileItem'
 import styles from './index.module.css'
 
-const FileList = ({ className, fileList, setFileList, onFileClick, currentFile }) => {
+const FileList = ({
+  checkedFiles,
+  className,
+  currentFile,
+  fileList,
+  onFileClick,
+  onStateClick,
+  setCheckedFiles,
+  setFileList
+}) => {
   const handleDrop = useCallback(files => {
     const fileList = files.map(({ name, path, type: mimeType }) => {
       const [type] = mimeType.split('/')
-      return { name, path, type }
+      return { id: path, name, path, type }
     })
-    setFileList(fileList.sort((a, b) => a.name.localeCompare(b.name)))
+    const sortedFileList = fileList.sort((a, b) => a.name.localeCompare(b.name))
+    setCheckedFiles([])
+    setFileList(sortedFileList)
   }, [])
   const { getRootProps, isDragActive } = useDropzone({ onDrop: handleDrop })
 
@@ -20,13 +31,16 @@ const FileList = ({ className, fileList, setFileList, onFileClick, currentFile }
       {!isDragActive && (
         <div className={styles.fileStack}>
           {fileList.map(file => {
-            const isSelected = currentFile && currentFile.path === file.path
+            const isSelected = currentFile && currentFile.id === file.id
+            const isChecked = checkedFiles.includes(file.id)
             return (
               <FileItem
-                key={file.path}
+                key={file.id}
                 file={file}
                 isSelected={isSelected}
                 onFileClick={onFileClick}
+                onStateClick={onStateClick}
+                isChecked={isChecked}
               />
             )
           })}

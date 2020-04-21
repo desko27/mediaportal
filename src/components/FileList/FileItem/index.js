@@ -4,11 +4,12 @@ import cx from 'classnames'
 import { ReactComponent as RadioIcon } from './icons/radio.svg'
 import { ReactComponent as FilmIcon } from './icons/film.svg'
 import { ReactComponent as ImageIcon } from './icons/image.svg'
+import { ReactComponent as CheckIcon } from './icons/check.svg'
 
 import styles from './index.module.css'
 
-const FileItem = ({ file, isSelected, onFileClick }) => {
-  const { name, path, type } = file
+const FileItem = ({ file, isSelected, isChecked, onFileClick, onStateClick }) => {
+  const { id, name, type } = file
 
   const dotSplitedName = name.split('.')
   const hasExtension = dotSplitedName.length > 1
@@ -16,12 +17,23 @@ const FileItem = ({ file, isSelected, onFileClick }) => {
   const baseName = hasExtension ? dotSplitedName.slice(0, -1).join('.') : name
 
   return (
-    <div className={cx(styles.wrapper, isSelected && styles.isSelected)}>
-      <button className={styles.fileState}>
-        {isSelected && <RadioIcon />}
+    <div
+      className={cx(
+        styles.wrapper,
+        isSelected && styles.isSelected,
+        isChecked && styles.isChecked
+      )}
+    >
+      <button
+        className={styles.fileState}
+        onClick={() => onStateClick(file)}
+      >
+        {isSelected
+          ? <RadioIcon />
+          : isChecked && <CheckIcon />}
       </button>
       <button
-        key={path}
+        key={id}
         className={styles.fileButton}
         onClick={() => onFileClick(file)}
       >
