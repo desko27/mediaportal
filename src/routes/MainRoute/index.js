@@ -32,8 +32,14 @@ const MainRoute = () => {
   }
 
   const handleFileClick = file => {
+    const { id } = file
     ipcRenderer.send('portal-resource', file)
     setCurrentFile(file)
+    setCheckedFiles(prev => {
+      const isChecked = prev.includes(id)
+      if (!isChecked) return [...prev, id]
+      return prev
+    })
   }
 
   const handleStateClick = file => {
@@ -46,8 +52,8 @@ const MainRoute = () => {
       return
     }
 
-    const isChecked = checkedFiles.includes(id)
     setCheckedFiles(prev => {
+      const isChecked = prev.includes(id)
       if (!isChecked) return [...prev, id]
       return prev.filter(checkedId => checkedId !== id)
     })
