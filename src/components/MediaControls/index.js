@@ -2,8 +2,8 @@ import React from 'react'
 import cx from 'classnames'
 
 import ElapsedTimeBar from './ElapsedTimeBar'
-import srcPlay from './icons/play.svg'
-import srcPause from './icons/pause.svg'
+import { ReactComponent as PlayIcon } from './icons/play.svg'
+import { ReactComponent as PauseIcon } from './icons/pause.svg'
 
 import styles from './index.module.css'
 
@@ -34,7 +34,7 @@ const MediaControls = ({ className, sendAction, video }) => {
         className={styles.playToggle}
         onClick={() => sendAction(video.isPaused ? 'play' : 'pause')}
       >
-        <img src={video.isPaused ? srcPlay : srcPause} />
+        {video.isPaused ? <PlayIcon /> : <PauseIcon />}
       </button>
       <ElapsedTimeBar
         className={styles.elapsedTimeBar}
