@@ -15,7 +15,24 @@ const PortalRoute = () => {
   }, [])
 
   useEffect(() => {
-    const handlePortalResource = (event, file) => setCurrentFile(file)
+    const handlePortalResource = (event, file) => {
+      setCurrentFile(file)
+      ipcRenderer.send(
+        'portal-state-update',
+        {
+          resource: {
+            type: file.type
+          },
+          ...(file.type === 'video' ? {
+            video: {
+              elapsedTime: 0,
+              elapsedRatio: 0,
+              isPaused: false
+            }
+          } : {})
+        }
+      )
+    }
     const handleKeydown = event => {
       if (event.keyCode === KEYCODES.ESCAPE) ipcRenderer.send('portal-fullscreen', false)
       if (event.keyCode === KEYCODES.INTRO) ipcRenderer.send('portal-fullscreen', true)
@@ -60,6 +77,9 @@ const PortalRoute = () => {
         ipcRenderer.send(
           'portal-state-update',
           {
+            resource: {
+              type: 'video'
+            },
             video: {
               elapsedTime,
               elapsedRatio,
