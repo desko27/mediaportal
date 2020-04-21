@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import cx from 'classnames'
 
 import { ReactComponent as RadioIcon } from './icons/radio.svg'
@@ -9,6 +9,8 @@ import { ReactComponent as CheckIcon } from './icons/check.svg'
 import styles from './index.module.css'
 
 const FileItem = ({ file, isSelected, isChecked, onFileClick, onStateClick }) => {
+  const [isFileButtonHover, setIsFileButtonHover] = useState()
+  const [isFileStateHover, setIsFileStateHover] = useState()
   const { id, name, type } = file
 
   const dotSplitedName = name.split('.')
@@ -21,21 +23,27 @@ const FileItem = ({ file, isSelected, isChecked, onFileClick, onStateClick }) =>
       className={cx(
         styles.wrapper,
         isSelected && styles.isSelected,
-        isChecked && styles.isChecked
+        isChecked && styles.isChecked,
+        isFileButtonHover && styles.isFileButtonHover,
+        isFileStateHover && styles.isFileStateHover
       )}
     >
       <button
         className={styles.fileState}
         onClick={() => onStateClick(file)}
+        onMouseEnter={() => setIsFileStateHover(true)}
+        onMouseLeave={() => setIsFileStateHover(false)}
       >
-        {isSelected
+        {(isSelected || isFileButtonHover)
           ? <RadioIcon />
-          : isChecked && <CheckIcon />}
+          : (isChecked || isFileStateHover) && <CheckIcon />}
       </button>
       <button
         key={id}
         className={styles.fileButton}
         onClick={() => onFileClick(file)}
+        onMouseEnter={() => setIsFileButtonHover(true)}
+        onMouseLeave={() => setIsFileButtonHover(false)}
       >
         <span className={styles.fileButtonType}>
           {type === 'video' ? <FilmIcon /> : <ImageIcon />}

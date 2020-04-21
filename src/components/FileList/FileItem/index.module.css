@@ -7,6 +7,10 @@
   --c-local-gray: var(--c-primary-gray);
   background-color: var(--c-primary-light);
 }
+.wrapper.isFileButtonHover:not(.isSelected) {
+  --c-local-gray: var(--c-primary-gray);
+  background-color: var(--c-accent);
+}
 
 .fileState {
   border: 0;
@@ -27,6 +31,15 @@
 }
 .isChecked:not(.isSelected) .fileState svg * {
   stroke: var(--c-success);
+}
+.isFileStateHover:not(.isSelected):not(.isChecked) .fileState svg * {
+  stroke: var(--c-gray);
+}
+.isFileStateHover.isSelected .fileState svg * {
+  stroke: var(--c-error);
+}
+.isFileButtonHover:not(.isSelected) .fileState svg * {
+  stroke: var(--c-local-gray);
 }
 
 .fileButton {

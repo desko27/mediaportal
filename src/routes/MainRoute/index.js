@@ -33,7 +33,13 @@ const MainRoute = () => {
       return { id: path, name, path, type }
     })
     const sortedFileList = fileList.sort((a, b) => a.name.localeCompare(b.name))
+
+    // reset everything
     setCheckedFiles([])
+    ipcRenderer.send('portal-resource', undefined)
+    setCurrentFile(undefined)
+
+    // set new file list
     setFileList(sortedFileList)
   }
 
