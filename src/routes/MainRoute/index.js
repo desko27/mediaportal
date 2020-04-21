@@ -82,6 +82,7 @@ const MainRoute = () => {
   return (
     <div className={styles.wrapper}>
       <Header
+        checkedFiles={checkedFiles}
         className={styles.header}
         filesNumber={fileList.length}
         onRemoveChecksClick={handleRemoveChecksClick}

@@ -5,7 +5,16 @@ import { ReactComponent as XCircleIcon } from './icons/x-circle.svg'
 
 import styles from './index.module.css'
 
-const Header = ({ className, filesNumber, onRemoveChecksClick, onRemoveChecksHover }) => {
+const Header = ({
+  checkedFiles,
+  className,
+  filesNumber,
+  onRemoveChecksClick,
+  onRemoveChecksHover
+}) => {
+  const progressRatioStr = `${checkedFiles.length}/${filesNumber}`
+  const progressRatio = filesNumber && (checkedFiles.length / filesNumber)
+
   return (
     <div className={cx(styles.wrapper, className)}>
       <div>
@@ -18,7 +27,10 @@ const Header = ({ className, filesNumber, onRemoveChecksClick, onRemoveChecksHov
           <XCircleIcon />
         </button>
       </div>
-      <span>{filesNumber || '--'} files</span>
+      <span>
+        {!!filesNumber && `${Math.round(progressRatio * 100)}% | `}
+        {filesNumber ? progressRatioStr : '--'} files
+      </span>
     </div>
   )
 }
