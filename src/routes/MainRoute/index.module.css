@@ -7,6 +7,15 @@
   overflow-x: hidden;
 }
 
+.header {
+  flex-shrink: 0;
+}
+
 .fileList {
   flex-grow: 1;
+  overflow-y: auto;
+}
+
+.mediaControls {
+  flex-shrink: 0;
 }

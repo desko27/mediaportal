@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 
 import Header from '../../components/Header'
 import FileList from '../../components/FileList'
-import VideoControls from '../../components/VideoControls'
+import MediaControls from '../../components/MediaControls'
 
 import styles from './index.module.css'
 
@@ -33,7 +33,10 @@ const MainRoute = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Header filesNumber={fileList.length} />
+      <Header
+        className={styles.header}
+        filesNumber={fileList.length}
+      />
       <FileList
         className={styles.fileList}
         fileList={fileList}
@@ -41,7 +44,8 @@ const MainRoute = () => {
         onFileClick={handleFileClick}
         currentFile={currentFile}
       />
-      <VideoControls
+      <MediaControls
+        className={styles.mediaControls}
         video={portalState.video}
         sendAction={(type, ...args) => {
           ipcRenderer.send('portal-action', { type, args })

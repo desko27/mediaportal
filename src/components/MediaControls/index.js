@@ -1,4 +1,5 @@
 import React from 'react'
+import cx from 'classnames'
 
 import ElapsedTimeBar from './ElapsedTimeBar'
 import srcPlay from './icons/play.svg'
@@ -12,10 +13,12 @@ const getMinutesString = seconds => {
   return `${minutes}:${restOfSeconds}`
 }
 
-const VideoControls = ({ sendAction, video }) => {
+const MediaControls = ({ className, sendAction, video }) => {
+  const baseClass = cx(styles.wrapper, className)
+
   if (!video) {
     return (
-      <div className={styles.wrapper}>
+      <div className={baseClass}>
         No video selected
       </div>
     )
@@ -26,7 +29,7 @@ const VideoControls = ({ sendAction, video }) => {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={baseClass}>
       <button
         className={styles.playToggle}
         onClick={() => sendAction(video.isPaused ? 'play' : 'pause')}
@@ -44,4 +47,4 @@ const VideoControls = ({ sendAction, video }) => {
   )
 }
 
-export default VideoControls
+export default MediaControls
