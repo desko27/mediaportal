@@ -25,6 +25,11 @@ const FileItem = ({
   const [extension] = hasExtension && dotSplitedName.slice(-1)
   const baseName = hasExtension ? dotSplitedName.slice(0, -1).join('.') : name
 
+  const handleStateClick = () => {
+    onStateClick(file)
+    setIsFileStateHover(false) // like if onMouseLeave happened
+  }
+
   return (
     <div
       className={cx(
@@ -38,7 +43,7 @@ const FileItem = ({
     >
       <button
         className={styles.fileState}
-        onClick={() => onStateClick(file)}
+        onClick={handleStateClick}
         onMouseEnter={() => setIsFileStateHover(true)}
         onMouseLeave={() => setIsFileStateHover(false)}
       >
