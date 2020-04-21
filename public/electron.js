@@ -37,6 +37,7 @@ function createMainWindow (portalWindow) {
 function createPortalWindow () {
   const window = new BrowserWindow({
     title: 'Portal',
+    frame: false,
     width: 768,
     height: 432,
     closable: false,

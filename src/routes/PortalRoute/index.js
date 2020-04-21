@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import './index.css'
+
+import styles from './index.module.css'
 
 const { ipcRenderer } = window.require('electron')
 
@@ -110,7 +111,7 @@ const PortalRoute = () => {
   const webPath = path && `file://${path}`
 
   return (
-    <div className='portal' onDoubleClick={handleDoubleClick}>
+    <div className={styles.wrapper} onDoubleClick={handleDoubleClick}>
       {currentFile && (
         type === 'image'
           ? <img src={webPath} alt={name} />
