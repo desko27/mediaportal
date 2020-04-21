@@ -3,9 +3,19 @@
   background-color: var(--c-black);
   color: var(--c-gray-semi-dark);
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   padding: 0 9px;
   font-family: monospace;
   font-weight: 700;
+}
+
+.removeChecksButton {
+  padding: 7px;
+  border: none;
+  background-color: transparent;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

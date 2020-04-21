@@ -69,11 +69,16 @@ const MainRoute = () => {
     })
   }
 
+  const handleRemoveChecksClick = () => {
+    setCheckedFiles([])
+  }
+
   return (
     <div className={styles.wrapper}>
       <Header
         className={styles.header}
         filesNumber={fileList.length}
+        onRemoveChecksClick={handleRemoveChecksClick}
       />
       <FileList
         checkedFiles={checkedFiles}
