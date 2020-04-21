@@ -1,18 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="22px" height="18px" viewBox="0 0 22 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
-    <title>radio</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Main" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g id="Normal" transform="translate(-13.000000, -164.000000)" stroke="#357792" stroke-width="2">
-            <g id="Files-List" transform="translate(0.000000, 54.000000)">
-                <g id="Casted-Video" transform="translate(0.000000, 101.000000)">
-                    <g id="radio" transform="translate(14.000000, 10.000000)">
-                        <circle id="Oval" cx="10" cy="8" r="2"></circle>
-                        <path d="M14.24,3.76 C15.3666623,4.88540954 15.9997199,6.41254451 15.9997199,8.005 C15.9997199,9.59745549 15.3666623,11.1245905 14.24,12.25 M5.76,12.24 C4.63333774,11.1145905 4.00028006,9.58745549 4.00028006,7.995 C4.00028006,6.40254451 4.63333774,4.87540954 5.76,3.75 M17.07,0.93 C20.9738194,4.83499851 20.9738194,11.1650015 17.07,15.07 M2.93,15.07 C-0.973819383,11.1650015 -0.973819383,4.83499851 2.93,0.93" id="Shape"></path>
-                    </g>
-                </g>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg width="22" height="18" xmlns="http://www.w3.org/2000/svg"><g transform="translate(1 1)" stroke="#357792" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="2"/><path d="M14.24 3.76a6 6 0 010 8.49m-8.48-.01a6 6 0 010-8.49M17.07.93c3.904 3.905 3.904 10.235 0 14.14m-14.14 0C-.974 11.165-.974 4.835 2.93.93"/></g></svg>
