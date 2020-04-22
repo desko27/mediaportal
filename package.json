@@ -11,11 +11,11 @@
     "electron-build": "electron-builder --mac --win",
     "build": "npm run react-build && npm run electron-build",
     "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron . --allow-file-access-from-files\"",
-    "eslint": "npx standard"
+    "lint": "npx standard"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run eslint"
+      "pre-commit": "npm run lint"
     }
   },
   "build": {
