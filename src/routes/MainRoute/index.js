@@ -1,3 +1,4 @@
+
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 
 import Header from '../../components/Header'
@@ -8,12 +9,26 @@ import styles from './index.module.css'
 
 const { ipcRenderer } = window.require('electron')
 
+const handleFileClickFactory = dependencies => file => {
+  const { setCurrentFile, setCheckedFiles } = dependencies
+  const { id } = file
+  ipcRenderer.send('portal-resource', file)
+  setCurrentFile(file)
+  setCheckedFiles(prev => {
+    const isChecked = prev.includes(id)
+    if (!isChecked) return [...prev, id]
+    return prev
+  })
+}
+
 const MainRoute = () => {
   const [fileList, setFileList] = useState([])
   const [checkedFiles, setCheckedFiles] = useState([])
   const [currentFile, setCurrentFile] = useState()
   const [portalState, setPortalState] = useState({})
   const [willRemoveChecks, setWillRemoveChecks] = useState()
+
+  const handleFileClick = handleFileClickFactory({ setCurrentFile, setCheckedFiles })
 
   useLayoutEffect(() => {
     // show window when mounted
@@ -27,6 +42,47 @@ const MainRoute = () => {
       ipcRenderer.removeListener('portal-state-update', portalStateListener)
     }
   }, [])
+
+  useEffect(() => {
+    const globalShortcutListener = (event, data) => {
+      const { type, payload } = data
+      switch (type) {
+        case 'cast-resource': {
+          switch (payload.number) {
+            case 0:
+              ipcRenderer.send('portal-resource', undefined)
+              setCurrentFile(undefined)
+              break
+            case 'next': {
+              if (!checkedFiles.length) {
+                handleFileClick(fileList[0])
+                break
+              }
+              const reversedCheckedFileObjects =
+                fileList.filter(f => checkedFiles.includes(f.id)).reverse()
+              const [lastCheckedFile] = reversedCheckedFileObjects
+              const lasCheckedIndex = fileList.indexOf(lastCheckedFile)
+              const targetIndex = lasCheckedIndex + 1
+              if (targetIndex >= fileList.length) break
+              handleFileClick(fileList[targetIndex])
+              break
+            }
+            default: {
+              const targetIndex = payload.number - 1
+              if (targetIndex >= fileList.length) break
+              handleFileClick(fileList[targetIndex])
+              break
+            }
+          }
+          break
+        }
+      }
+    }
+    ipcRenderer.on('global-shortcut', globalShortcutListener)
+    return () => {
+      ipcRenderer.removeListener('global-shortcut', globalShortcutListener)
+    }
+  }, [fileList, checkedFiles])
 
   const handleDropFiles = files => {
     const fileList = files.map(({ name, path, type: mimeType }) => {
@@ -48,17 +104,6 @@ const MainRoute = () => {
     ipcRenderer.send('portal-action', { type, args })
   }
 
-  const handleFileClick = file => {
-    const { id } = file
-    ipcRenderer.send('portal-resource', file)
-    setCurrentFile(file)
-    setCheckedFiles(prev => {
-      const isChecked = prev.includes(id)
-      if (!isChecked) return [...prev, id]
-      return prev
-    })
-  }
-
   const handleStateClick = file => {
     const { id } = file
     const isCurrent = currentFile && currentFile.id === id
@@ -76,7 +121,7 @@ const MainRoute = () => {
     })
   }
 
-  const handleRemoveChecksClick = () => setCheckedFiles([])
+  const handleRemoveChecksClick = () => setCheckedFiles(currentFile ? [currentFile.id] : [])
   const handleRemoveChecksHover = isHover => setWillRemoveChecks(isHover)
 
   return (

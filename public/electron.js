@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Menu } = require('electron')
+const { app, BrowserWindow, ipcMain, Menu, globalShortcut } = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
 
@@ -51,6 +51,22 @@ function createPortalWindow () {
 app.on('ready', () => {
   const portalWindow = createPortalWindow()
   const mainWindow = createMainWindow(portalWindow)
+
+  // register shortcuts
+  Array(10).fill().map((_, number) => {
+    globalShortcut.register(`Alt+Shift+${number}`, () => {
+      mainWindow.webContents.send('global-shortcut', {
+        type: 'cast-resource',
+        payload: { number }
+      })
+    })
+  })
+  globalShortcut.register('Alt+Shift+A', () => {
+    mainWindow.webContents.send('global-shortcut', {
+      type: 'cast-resource',
+      payload: { number: 'next' }
+    })
+  })
 
   ipcMain.on('portal-fullscreen', (event, value) => {
     const newValue = value === 'toggle' ? !portalWindow.isFullScreen() : value
