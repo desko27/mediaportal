@@ -1,5 +1,5 @@
 
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 
 import Header from '../../components/Header'
 import FileList from '../../components/FileList'
@@ -9,26 +9,12 @@ import styles from './index.module.css'
 
 const { ipcRenderer } = window.require('electron')
 
-const handleFileClickFactory = dependencies => file => {
-  const { setCurrentFile, setCheckedFiles } = dependencies
-  const { id } = file
-  ipcRenderer.send('portal-resource', file)
-  setCurrentFile(file)
-  setCheckedFiles(prev => {
-    const isChecked = prev.includes(id)
-    if (!isChecked) return [...prev, id]
-    return prev
-  })
-}
-
 const MainRoute = () => {
   const [fileList, setFileList] = useState([])
   const [checkedFiles, setCheckedFiles] = useState([])
   const [currentFile, setCurrentFile] = useState()
   const [portalState, setPortalState] = useState({})
   const [willRemoveChecks, setWillRemoveChecks] = useState()
-
-  const handleFileClick = handleFileClickFactory({ setCurrentFile, setCheckedFiles })
 
   useLayoutEffect(() => {
     // show window when mounted
@@ -41,6 +27,17 @@ const MainRoute = () => {
     return () => {
       ipcRenderer.removeListener('portal-state-update', portalStateListener)
     }
+  }, [])
+
+  const handleFileClick = useCallback(file => {
+    const { id } = file
+    ipcRenderer.send('portal-resource', file)
+    setCurrentFile(file)
+    setCheckedFiles(prev => {
+      const isChecked = prev.includes(id)
+      if (!isChecked) return [...prev, id]
+      return prev
+    })
   }, [])
 
   useEffect(() => {
@@ -76,13 +73,14 @@ const MainRoute = () => {
           }
           break
         }
+        default:
       }
     }
     ipcRenderer.on('global-shortcut', globalShortcutListener)
     return () => {
       ipcRenderer.removeListener('global-shortcut', globalShortcutListener)
     }
-  }, [fileList, checkedFiles])
+  }, [handleFileClick, fileList, checkedFiles])
 
   const handleDropFiles = files => {
     const fileList = files.map(({ name, path, type: mimeType }) => {
