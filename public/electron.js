@@ -1,7 +1,6 @@
-const { app, BrowserWindow, ipcMain, Menu } = require('electron')
+const { app, BrowserWindow, ipcMain, Menu, globalShortcut } = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
-const { version } = require('../package.json')
 
 // remove browser's menu bar for production env
 if (!isDev) Menu.setApplicationMenu(false)
@@ -22,7 +21,7 @@ function getAppUrl (route) {
 
 function createMainWindow (portalWindow) {
   const window = new BrowserWindow({
-    title: `Media Portal v${version}`,
+    title: 'Media Portal',
     width: 350,
     height: 550,
     ...commonWindowOptions
@@ -38,6 +37,7 @@ function createMainWindow (portalWindow) {
 function createPortalWindow () {
   const window = new BrowserWindow({
     title: 'Portal',
+    frame: false,
     width: 768,
     height: 432,
     closable: false,
@@ -52,6 +52,22 @@ app.on('ready', () => {
   const portalWindow = createPortalWindow()
   const mainWindow = createMainWindow(portalWindow)
 
+  // register shortcuts
+  Array(10).fill().map((_, number) => {
+    globalShortcut.register(`Alt+Shift+${number}`, () => {
+      mainWindow.webContents.send('global-shortcut', {
+        type: 'cast-resource',
+        payload: { number }
+      })
+    })
+  })
+  globalShortcut.register('Alt+Shift+A', () => {
+    mainWindow.webContents.send('global-shortcut', {
+      type: 'cast-resource',
+      payload: { number: 'next' }
+    })
+  })
+
   ipcMain.on('portal-fullscreen', (event, value) => {
     const newValue = value === 'toggle' ? !portalWindow.isFullScreen() : value
     portalWindow.setFullScreen(newValue)
@@ -62,8 +78,18 @@ app.on('ready', () => {
   ipcMain.once('portal-window-ready', () => portalWindow.show())
   ipcMain.once('main-window-ready', () => mainWindow.show())
 
-  // redirect event from main window to portal window
+  // redirect resource event from main window to portal window
   ipcMain.on('portal-resource', (event, data) => {
     portalWindow.webContents.send('portal-resource', data)
+  })
+
+  // redirect actions from main window to portal window
+  ipcMain.on('portal-action', (event, data) => {
+    portalWindow.webContents.send('portal-action', data)
+  })
+
+  // redirect portal state update from portal window to main window
+  ipcMain.on('portal-state-update', (event, data) => {
+    mainWindow.webContents.send('portal-state-update', data)
   })
 })

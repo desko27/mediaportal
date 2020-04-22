@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import './index.css'
+
+import styles from './index.module.css'
 
 const { ipcRenderer } = window.require('electron')
 
@@ -15,17 +16,57 @@ const PortalRoute = () => {
   }, [])
 
   useEffect(() => {
-    const handlePortalResource = (event, file) => setCurrentFile(file)
+    const handlePortalResource = (event, file) => {
+      if (!file) {
+        setCurrentFile(undefined)
+        ipcRenderer.send('portal-state-update', {})
+        return
+      }
+
+      setCurrentFile(file)
+      ipcRenderer.send(
+        'portal-state-update',
+        {
+          resource: {
+            type: file.type
+          },
+          ...(file.type === 'video' ? {
+            video: {
+              elapsedTime: 0,
+              elapsedRatio: 0,
+              isPaused: false
+            }
+          } : {})
+        }
+      )
+    }
     const handleKeydown = event => {
       if (event.keyCode === KEYCODES.ESCAPE) ipcRenderer.send('portal-fullscreen', false)
       if (event.keyCode === KEYCODES.INTRO) ipcRenderer.send('portal-fullscreen', true)
     }
 
+    const handleVideoAction = (event, action) => {
+      const video = videoRef.current
+      const { type, args } = action
+
+      // special managed actions
+      if (type === 'setElapsedRatio') {
+        const [wantedRatio] = args
+        video.currentTime = wantedRatio * video.duration
+        return
+      }
+
+      // directly mirrored media element functions
+      video[type](...args)
+    }
+
     ipcRenderer.on('portal-resource', handlePortalResource)
+    ipcRenderer.on('portal-action', handleVideoAction)
     document.addEventListener('keydown', handleKeydown)
 
     return () => {
       ipcRenderer.removeListener('portal-resource', handlePortalResource)
+      ipcRenderer.removeListener('portal-action', handleVideoAction)
       document.removeEventListener('keydown', handleKeydown)
     }
   }, [])
@@ -33,8 +74,34 @@ const PortalRoute = () => {
   useEffect(() => {
     if (!currentFile) return
     if (currentFile.type === 'video') {
-      videoRef.current.load()
-      videoRef.current.play()
+      const video = videoRef.current
+
+      const timeupdateListener = () => {
+        const elapsedTime = video.currentTime
+        const elapsedRatioCalc = video.currentTime / video.duration
+        const elapsedRatio = isNaN(elapsedRatioCalc) ? 0 : elapsedRatioCalc
+
+        ipcRenderer.send(
+          'portal-state-update',
+          {
+            resource: {
+              type: 'video'
+            },
+            video: {
+              elapsedTime,
+              elapsedRatio,
+              isPaused: video.paused
+            }
+          }
+        )
+      }
+      video.addEventListener('timeupdate', timeupdateListener)
+      video.load()
+      video.play()
+
+      return () => {
+        video.removeEventListener('timeupdate', timeupdateListener)
+      }
     }
   }, [currentFile])
 
@@ -44,7 +111,7 @@ const PortalRoute = () => {
   const webPath = path && `file://${path}`
 
   return (
-    <div className='portal' onDoubleClick={handleDoubleClick}>
+    <div className={styles.wrapper} onDoubleClick={handleDoubleClick}>
       {currentFile && (
         type === 'image'
           ? <img src={webPath} alt={name} />

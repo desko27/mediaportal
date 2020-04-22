@@ -1,0 +1,25 @@
+.wrapper {
+  height: 36px;
+  background-color: var(--c-black);
+  color: var(--c-gray-semi-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 9px;
+  font-family: monospace;
+  font-weight: 700;
+}
+
+.removeChecksButton {
+  color: var(--c-gray-semi-dark);
+  padding: 7px;
+  border: none;
+  background-color: transparent;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.removeChecksButton:hover {
+  color: var(--c-error);
+}

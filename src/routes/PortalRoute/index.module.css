@@ -1,13 +1,16 @@
-.portal {
+.wrapper {
   height: 100vh;
   width: 100vw;
   background-color: #000;
   overflow: hidden;
+
+  /* allow dragging the whole window */
+  user-select: none;
+  -webkit-app-region: drag;
 }
 
-.portal > * {
+.wrapper > * {
   height: 100%;
   width: 100%;
   object-fit: contain;
 }
-

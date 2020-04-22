@@ -1,0 +1,21 @@
+.wrapper {
+  position: relative;
+  background-color: var(--c-white);
+  height: 16px;
+  border-radius: 8px;
+}
+
+.wrapper::after {
+  margin: 3px;
+  border-radius: 5px;
+  content: '';
+  background-color: var(--c-secondary);
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: var(--right);
+}
+.wrapper.isPaused::after {
+  background-color: var(--c-gray-semi-dark);
+}

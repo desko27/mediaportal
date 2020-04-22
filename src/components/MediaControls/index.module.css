@@ -1,0 +1,27 @@
+.wrapper {
+  color: var(--c-white);
+  background-color: var(--c-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  font-family: monospace;
+  font-weight: 700;
+  height: 36px;
+}
+.wrapper * + * {
+  margin-left: 10px;
+}
+
+.playToggle {
+  line-height: 0;
+  width: 16px;
+  padding: 0;
+  color: var(--c-white);
+  background-color: transparent;
+  border: none;
+}
+
+.elapsedTimeBar {
+  flex-grow: 1;
+}

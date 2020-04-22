@@ -1,0 +1,14 @@
+.wrapper {
+  background-color: var(--c-white);
+}
+
+.wrapper.draggingPlaceholder {
+  border: 3px dashed var(--c-gray);
+  border-radius: 10px;
+  margin: 20px;
+  content: ''
+}
+
+.fileStack {
+  margin: 10px 0;
+}

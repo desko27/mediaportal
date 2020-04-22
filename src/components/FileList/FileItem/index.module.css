@@ -1,0 +1,81 @@
+.wrapper {
+  --c-local-gray: var(--c-gray);
+  display: flex;
+  align-items: center;
+}
+.wrapper.isSelected {
+  --c-local-gray: var(--c-primary-gray);
+  background-color: var(--c-primary-light);
+}
+.wrapper.isFileButtonHover:not(.isSelected) {
+  --c-local-gray: var(--c-primary-gray);
+  background-color: var(--c-accent);
+}
+
+.fileState {
+  border: 0;
+  background-color: transparent;
+  height: 35px;
+  width: calc(22px + 2 * 7px);
+  padding: 0 7px;
+  margin: 0 7px;
+
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.fileState {
+  color: var(--c-primary);
+}
+.isChecked:not(.isSelected) .fileState {
+  color: var(--c-success);
+}
+.isChecked.willRemoveChecks:not(.isSelected) .fileState {
+  color: var(--c-error);
+}
+.isFileStateHover:not(.isSelected):not(.isChecked) .fileState {
+  color: var(--c-gray);
+}
+.isFileStateHover.isSelected .fileState,
+.isFileStateHover.isChecked .fileState {
+  color: var(--c-error);
+}
+.isFileButtonHover:not(.isSelected) .fileState {
+  color: var(--c-local-gray);
+}
+
+.fileButton {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  text-align: left;
+  flex-grow: 1;
+  font-size: 18px;
+  height: 35px;
+  padding-right: 14px;
+  overflow: hidden;
+}
+.isSelected .fileButton {
+  color: var(--c-primary);
+}
+
+.fileButtonType {
+  line-height: 0;
+  margin-right: 12px;
+}
+.fileButtonType {
+  color: var(--c-local-gray);
+}
+
+.fileButtonText {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.fileButtonTextExtension {
+  color: var(--c-local-gray);
+}

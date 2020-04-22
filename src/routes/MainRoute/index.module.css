@@ -1,0 +1,21 @@
+.wrapper {
+  background-color: var(--c-white);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.header {
+  flex-shrink: 0;
+}
+
+.fileList {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.mediaControls {
+  flex-shrink: 0;
+}
