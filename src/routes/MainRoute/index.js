@@ -134,19 +134,20 @@ const MainRoute = () => {
         onRemoveChecksHover={handleRemoveChecksHover}
         onMenuClick={() => setIsMenuOpen(prev => !prev)}
       />
-      <div className={styles.mainContainer}>
-        <Menu isOpen={isMenuOpen} />
-        <FileList
-          checkedFiles={checkedFiles}
-          className={styles.fileList}
-          currentFile={currentFile}
-          fileList={fileList}
-          onDropFiles={handleDropFiles}
-          onFileClick={handleFileClick}
-          onStateClick={handleStateClick}
-          willRemoveChecks={willRemoveChecks}
-        />
-      </div>
+      <Menu
+        isOpen={isMenuOpen}
+        setIsOpen={setIsMenuOpen}
+      />
+      <FileList
+        checkedFiles={checkedFiles}
+        className={styles.fileList}
+        currentFile={currentFile}
+        fileList={fileList}
+        onDropFiles={handleDropFiles}
+        onFileClick={handleFileClick}
+        onStateClick={handleStateClick}
+        willRemoveChecks={willRemoveChecks}
+      />
       <MediaControls
         className={styles.mediaControls}
         sendAction={sendAction}

@@ -20,6 +20,9 @@
   justify-content: center;
   align-items: center;
 }
+.headerIconButton:hover {
+  color: var(--c-white);
+}
 
 .removeChecksButton:hover {
   color: var(--c-error);
