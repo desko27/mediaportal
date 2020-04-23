@@ -1,0 +1,21 @@
+.wrapper {
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  background-color: var(--c-gray);
+  box-shadow: -5px 0px 0px 0px rgba(var(--c-black), 0.15);
+  transform: translateX(100%);
+  transition: transform 200ms ease-out;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 10px;
+}
+
+.wrapper.isOpen {
+  transform: translateX(0);
+}

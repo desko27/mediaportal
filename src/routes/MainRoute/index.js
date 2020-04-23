@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 
 import Header from '../../components/Header'
+import Menu from '../../components/Menu'
 import FileList from '../../components/FileList'
 import MediaControls from '../../components/MediaControls'
 
@@ -15,6 +16,7 @@ const MainRoute = () => {
   const [currentFile, setCurrentFile] = useState()
   const [portalState, setPortalState] = useState({})
   const [willRemoveChecks, setWillRemoveChecks] = useState()
+  const [isMenuOpen, setIsMenuOpen] = useState()
 
   useLayoutEffect(() => {
     // show window when mounted
@@ -130,17 +132,21 @@ const MainRoute = () => {
         filesNumber={fileList.length}
         onRemoveChecksClick={handleRemoveChecksClick}
         onRemoveChecksHover={handleRemoveChecksHover}
+        onMenuClick={() => setIsMenuOpen(prev => !prev)}
       />
-      <FileList
-        checkedFiles={checkedFiles}
-        className={styles.fileList}
-        currentFile={currentFile}
-        fileList={fileList}
-        onDropFiles={handleDropFiles}
-        onFileClick={handleFileClick}
-        onStateClick={handleStateClick}
-        willRemoveChecks={willRemoveChecks}
-      />
+      <div className={styles.mainContainer}>
+        <Menu isOpen={isMenuOpen} />
+        <FileList
+          checkedFiles={checkedFiles}
+          className={styles.fileList}
+          currentFile={currentFile}
+          fileList={fileList}
+          onDropFiles={handleDropFiles}
+          onFileClick={handleFileClick}
+          onStateClick={handleStateClick}
+          willRemoveChecks={willRemoveChecks}
+        />
+      </div>
       <MediaControls
         className={styles.mediaControls}
         sendAction={sendAction}
