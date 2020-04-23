@@ -1,4 +1,6 @@
 .wrapper {
+  --bxsh-local-width: 5px;
+
   overflow-y: auto;
   position: absolute;
   top: 0;
@@ -6,8 +8,8 @@
   right: 0;
   width: 200px;
   background-color: var(--c-gray);
-  box-shadow: -5px 0px 0px 0px rgba(var(--c-black), 0.15);
-  transform: translateX(100%);
+  box-shadow: calc(-1 * var(--bxsh-local-width)) 0px 0px 0px rgba(var(--c-black-rgb), 0.15);
+  transform: translateX(calc(100% + var(--bxsh-local-width)));
   transition: transform 200ms ease-out;
 
   display: flex;
