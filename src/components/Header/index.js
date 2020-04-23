@@ -12,7 +12,6 @@ const Header = ({
   onRemoveChecksClick,
   onRemoveChecksHover
 }) => {
-  const progressRatioStr = `${checkedFiles.length}/${filesNumber}`
   const progressRatio = filesNumber && (checkedFiles.length / filesNumber)
 
   return (
@@ -29,7 +28,7 @@ const Header = ({
       </div>
       <span>
         {!!filesNumber && `${Math.round(progressRatio * 100)}% | `}
-        {filesNumber ? progressRatioStr : '--'} files
+        {filesNumber || '--'} files
       </span>
     </div>
   )
