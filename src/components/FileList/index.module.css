@@ -1,6 +1,5 @@
 .wrapper {
   background-color: var(--c-white);
-  overflow-y: auto;
 }
 
 .wrapper.draggingPlaceholder {

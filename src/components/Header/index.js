@@ -6,6 +6,8 @@ import { ReactComponent as MenuIcon } from './icons/menu.svg'
 
 import styles from './index.module.css'
 
+const FLEX_SPACER = <div style={{ flexGrow: 1 }} />
+
 const Header = ({
   checkedFiles,
   className,
@@ -18,28 +20,25 @@ const Header = ({
 
   return (
     <div className={cx(styles.wrapper, className)}>
-      <div className={styles.flexLine}>
-        <button
-          className={cx(styles.headerIconButton, styles.removeChecksButton)}
-          onClick={onRemoveChecksClick}
-          onMouseEnter={() => onRemoveChecksHover(true)}
-          onMouseLeave={() => onRemoveChecksHover(false)}
-        >
-          <XCircleIcon />
-        </button>
-        <span className={styles.filesInfo}>
-          {!!filesNumber && `${Math.round(progressRatio * 100)}% | `}
-          {filesNumber || '--'} files
-        </span>
-      </div>
-      <div className={styles.flexLine}>
-        <button
-          className={styles.headerIconButton}
-          onClick={onMenuClick}
-        >
-          <MenuIcon />
-        </button>
-      </div>
+      <button
+        className={cx(styles.headerIconButton, styles.removeChecksButton)}
+        onClick={onRemoveChecksClick}
+        onMouseEnter={() => onRemoveChecksHover(true)}
+        onMouseLeave={() => onRemoveChecksHover(false)}
+      >
+        <XCircleIcon />
+      </button>
+      <span className={styles.filesInfo}>
+        {!!filesNumber && `${Math.round(progressRatio * 100)}% | `}
+        {filesNumber || '--'} files
+      </span>
+      {FLEX_SPACER}
+      <button
+        className={styles.headerIconButton}
+        onClick={onMenuClick}
+      >
+        <MenuIcon />
+      </button>
     </div>
   )
 }

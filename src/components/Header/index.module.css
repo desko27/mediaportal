@@ -10,11 +10,6 @@
   font-weight: 700;
 }
 
-.flexLine {
-  display: flex;
-  align-items: center;
-}
-
 .headerIconButton {
   color: var(--c-gray-semi-dark);
   padding: 7px;
