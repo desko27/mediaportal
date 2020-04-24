@@ -2,7 +2,7 @@
   "name": "mediaportal",
   "description": "Portal for media",
   "author": "desko27",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "scripts": {
     "react-start": "react-scripts start",
