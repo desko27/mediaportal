@@ -1,0 +1,13 @@
+.wrapper {
+  height: 16px;
+  padding: 0 3px 0 5px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--c-success);
+  color: var(--c-white);
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}

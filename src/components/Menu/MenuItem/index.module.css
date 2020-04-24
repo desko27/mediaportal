@@ -7,6 +7,9 @@
   text-decoration: none;
   font-family: monospace;
   font-weight: 700;
+
+  display: flex;
+  align-items: center;
 }
 .wrapper:hover {
   text-decoration: underline;
@@ -19,4 +22,16 @@
   text-decoration: none;
   cursor: auto;
   color: #677985;
+}
+
+.wrapper.hasNotification {
+  color: var(--c-black);
+}
+
+.notificationBall {
+  height: 10px;
+  width: 10px;
+  border-radius: 5px;
+  background-color: var(--c-success-semi-dark);
+  margin-right: 10px;
 }

@@ -28,6 +28,21 @@
   color: var(--c-error);
 }
 
+.hasNotification .menuButton {
+  position: relative;
+}
+.hasNotification .menuButton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 8px;
+  width: 8px;
+  border-radius: 4px;
+  background-color: var(--c-white);
+  transform: translate(-4px, 3px);
+}
+
 .filesInfo {
   margin-left: 7px;
 }
