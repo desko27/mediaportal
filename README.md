@@ -1,6 +1,8 @@
 # Media Portal <img height="34" width="34" src="https://user-images.githubusercontent.com/4168389/80243995-80921700-8668-11ea-90ec-e19eb6c02c75.png"> <img height="30" width="30" src="https://user-images.githubusercontent.com/4168389/80243999-81c34400-8668-11ea-94b5-ad61ef3945b7.png">
 
-Media Portal es una aplicación para ordenador gratuita y de código abierto, que funciona tanto en sistemas Windows como en Mac. [Puedes descargarla aquí](https://github.com/desko27/mediaportal/releases/latest).
+> [⬇️ Descargar la aplicación](https://github.com/desko27/mediaportal/releases/latest)
+
+Media Portal es una aplicación para ordenador gratuita y de código abierto, que funciona tanto en sistemas Windows como en Mac.
 
 Si necesitas exponer diferentes imágenes o vídeos durante una videoconferencia y utilizas la función de compartir pantalla, Media Portal te ayuda a preparar una lista de archivos desde la cual mandarás contenido en un solo click.
 
