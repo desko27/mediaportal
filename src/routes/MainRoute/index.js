@@ -1,6 +1,8 @@
 
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 
+import { version } from '../../../package.json'
+
 import Header from '../../components/Header'
 import Menu from '../../components/Menu'
 import FileList from '../../components/FileList'
@@ -8,9 +10,13 @@ import MediaControls from '../../components/MediaControls'
 
 import styles from './index.module.css'
 
-const { ipcRenderer } = window.require('electron')
+const { ipcRenderer, shell } = window.require('electron')
+const openUrl = url => shell.openExternal(url)
+
+const performUpdate = () => openUrl('https://github.com/desko27/mediaportal/releases/latest')
 
 const MainRoute = () => {
+  const [isUpdateAvailable, setIsUpdateAvailable] = useState()
   const [fileList, setFileList] = useState([])
   const [checkedFiles, setCheckedFiles] = useState([])
   const [currentFile, setCurrentFile] = useState()
@@ -21,6 +27,23 @@ const MainRoute = () => {
   useLayoutEffect(() => {
     // show window when mounted
     ipcRenderer.send('main-window-ready')
+  }, [])
+
+  // check for updates once at startup
+  useEffect(() => {
+    const githubApiLatestReleaseUrl =
+      'https://api.github.com/repos/desko27/mediaportal/releases/latest'
+    const headers = new window.Headers({ Accept: 'application/vnd.github.v3+json' })
+
+    window
+      .fetch(githubApiLatestReleaseUrl, headers)
+      .then(res => res.json())
+      .then(latestRelease => {
+        const { tag_name: tagName } = latestRelease
+        if (tagName === `v${version}`) return // we're up to date!
+        setIsUpdateAvailable(true)
+      })
+      .catch(err => console.log(err))
   }, [])
 
   useEffect(() => {
@@ -47,6 +70,8 @@ const MainRoute = () => {
       const { type, payload } = data
       switch (type) {
         case 'cast-resource': {
+          if (!fileList.length) break // can't cast resource with no resources
+
           switch (payload.number) {
             case 0:
               ipcRenderer.send('portal-resource', undefined)
@@ -130,12 +155,16 @@ const MainRoute = () => {
         checkedFiles={checkedFiles}
         className={styles.header}
         filesNumber={fileList.length}
+        isUpdateAvailable={isUpdateAvailable}
+        onMenuClick={() => setIsMenuOpen(prev => !prev)}
         onRemoveChecksClick={handleRemoveChecksClick}
         onRemoveChecksHover={handleRemoveChecksHover}
-        onMenuClick={() => setIsMenuOpen(prev => !prev)}
+        performUpdate={performUpdate}
       />
       <Menu
         isOpen={isMenuOpen}
+        isUpdateAvailable={isUpdateAvailable}
+        performUpdate={performUpdate}
         setIsOpen={setIsMenuOpen}
       />
       <FileList

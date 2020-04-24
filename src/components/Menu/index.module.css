@@ -17,6 +17,8 @@
   box-shadow: calc(-1 * var(--bxsh-width)) 0px 0px 0px rgba(var(--c-black-rgb), 0.15);
   transform: translateX(calc(100% + var(--bxsh-width)));
   transition: transform var(--transition-tail);
+  will-change: trasnform;
+  backface-visibility: hidden;
 
   display: flex;
   flex-direction: column;
@@ -38,6 +40,8 @@
   background-color: rgba(var(--c-black-rgb), 0.5);
   opacity: 0;
   transition: opacity var(--transition-tail);
+  will-change: opacity;
+  backface-visibility: hidden;
 }
 .isOpen .overlay {
   pointer-events: all;

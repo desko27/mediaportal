@@ -3,6 +3,7 @@ import cx from 'classnames'
 
 import { ReactComponent as XCircleIcon } from './icons/x-circle.svg'
 import { ReactComponent as MenuIcon } from './icons/menu.svg'
+import UpdateButton from './UpdateButton'
 
 import styles from './index.module.css'
 
@@ -12,14 +13,17 @@ const Header = ({
   checkedFiles,
   className,
   filesNumber,
+  isUpdateAvailable,
   onMenuClick,
   onRemoveChecksClick,
-  onRemoveChecksHover
+  onRemoveChecksHover,
+  performUpdate
 }) => {
   const progressRatio = filesNumber && (checkedFiles.length / filesNumber)
+  const hasNotification = !!isUpdateAvailable
 
   return (
-    <div className={cx(styles.wrapper, className)}>
+    <div className={cx(styles.wrapper, className, hasNotification && styles.hasNotification)}>
       <button
         className={cx(styles.headerIconButton, styles.removeChecksButton)}
         onClick={onRemoveChecksClick}
@@ -33,8 +37,9 @@ const Header = ({
         {filesNumber || '--'} files
       </span>
       {FLEX_SPACER}
+      {isUpdateAvailable && <UpdateButton onClick={performUpdate} />}
       <button
-        className={styles.headerIconButton}
+        className={cx(styles.headerIconButton, styles.menuButton)}
         onClick={onMenuClick}
       >
         <MenuIcon />

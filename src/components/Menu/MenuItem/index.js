@@ -3,12 +3,24 @@ import cx from 'classnames'
 
 import styles from './index.module.css'
 
-const MenuItem = ({ children, isDisabled, onClick = () => {} }) => {
+const noop = () => {}
+
+const MenuItem = ({
+  children,
+  hasNotification,
+  isDisabled,
+  onClick = noop
+}) => {
   return (
     <button
-      className={cx(styles.wrapper, isDisabled && styles.isDisabled)}
+      className={cx(
+        styles.wrapper,
+        isDisabled && styles.isDisabled,
+        hasNotification && styles.hasNotification
+      )}
       onClick={onClick}
     >
+      {hasNotification && <span className={styles.notificationBall} />}{' '}
       {children}
     </button>
   )
