@@ -1,6 +1,6 @@
 # Media Portal
 
-Media Portal es una aplicación para ordenador gratuita y de código abierto, que funciona tanto en sistemas Windows como en Mac. [Puedes descargarlo aquí](https://github.com/desko27/mediaportal/releases).
+Media Portal es una aplicación para ordenador gratuita y de código abierto, que funciona tanto en sistemas Windows como en Mac. [Puedes descargarla aquí](https://github.com/desko27/mediaportal/releases).
 
 Si necesitas exponer diferentes imágenes o vídeos durante una videoconferencia y utilizas la función de compartir pantalla, Media Portal te ayuda a preparar una lista de archivos desde la cual mandarás contenido en un solo click.
 
@@ -8,21 +8,21 @@ Si necesitas exponer diferentes imágenes o vídeos durante una videoconferencia
 
 Al ejecutar Media Portal se abren dos ventanas: una es la ventana de gestión de la lista de archivos, la otra es el portal donde veremos el contenido.
 
-![Boot Media Portal](https://user-images.githubusercontent.com/4168389/80213526-95a38180-8639-11ea-8dc2-2598467f5fe8.png)
+![Boot Media Portal](https://user-images.githubusercontent.com/4168389/80231414-9f39e300-8653-11ea-9453-74fbc6f83ac9.png)
 
 A continuación, solo tenemos que seleccionar y arrastrar nuestra lista de archivos de imagen o vídeo hacia la ventana de gestión.
 
-![Dragging Media Files](https://user-images.githubusercontent.com/4168389/80216235-0a78ba80-863e-11ea-82cc-273ff7473a0c.png)
+![Dragging Media Files](https://user-images.githubusercontent.com/4168389/80231433-a52fc400-8653-11ea-9d38-6ea11f9d19f3.png)
 
 Entonces, hacemos click en cualquiera de ellos e inmediatamente veremos el contenido en el portal.
 
 Se trate de una imagen...
 
-![Sending Content Image](https://user-images.githubusercontent.com/4168389/80216240-0b115100-863e-11ea-818d-d5c536058919.png)
+![Sending Content Image](https://user-images.githubusercontent.com/4168389/80231438-a82ab480-8653-11ea-959f-f2322055848f.png)
 
 ... o de vídeo
 
-![Sending Content Video](https://user-images.githubusercontent.com/4168389/80216242-0ba9e780-863e-11ea-99f5-9e8f3d0f1985.png)
+![Sending Content Video](https://user-images.githubusercontent.com/4168389/80231445-aa8d0e80-8653-11ea-81dd-a4bf6bc1e576.png)
 
 
 Es así de sencillo, ¡ya puedes empezar a usar Media Portal!
