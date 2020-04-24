@@ -31,8 +31,12 @@ const MainRoute = () => {
 
   // check for updates once at startup
   useEffect(() => {
+    const githubApiLatestReleaseUrl =
+      'https://api.github.com/repos/desko27/mediaportal/releases/latest'
+    const headers = new window.Headers({ Accept: 'application/vnd.github.v3+json' })
+
     window
-      .fetch('https://api.github.com/repos/desko27/mediaportal/releases/latest')
+      .fetch(githubApiLatestReleaseUrl, headers)
       .then(res => res.json())
       .then(latestRelease => {
         const { tag_name: tagName } = latestRelease
