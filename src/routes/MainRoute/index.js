@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 
 import Header from '../../components/Header'
+import Menu from '../../components/Menu'
 import FileList from '../../components/FileList'
 import MediaControls from '../../components/MediaControls'
 
@@ -15,6 +16,7 @@ const MainRoute = () => {
   const [currentFile, setCurrentFile] = useState()
   const [portalState, setPortalState] = useState({})
   const [willRemoveChecks, setWillRemoveChecks] = useState()
+  const [isMenuOpen, setIsMenuOpen] = useState()
 
   useLayoutEffect(() => {
     // show window when mounted
@@ -130,6 +132,11 @@ const MainRoute = () => {
         filesNumber={fileList.length}
         onRemoveChecksClick={handleRemoveChecksClick}
         onRemoveChecksHover={handleRemoveChecksHover}
+        onMenuClick={() => setIsMenuOpen(prev => !prev)}
+      />
+      <Menu
+        isOpen={isMenuOpen}
+        setIsOpen={setIsMenuOpen}
       />
       <FileList
         checkedFiles={checkedFiles}

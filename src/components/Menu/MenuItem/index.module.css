@@ -1,0 +1,22 @@
+.wrapper {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  color: var(--c-gray-dark);
+
+  text-decoration: none;
+  font-family: monospace;
+  font-weight: 700;
+}
+.wrapper:hover {
+  text-decoration: underline;
+}
+.wrapper + .wrapper {
+  margin-top: 15px;
+}
+
+.wrapper.isDisabled {
+  text-decoration: none;
+  cursor: auto;
+  color: #677985;
+}
