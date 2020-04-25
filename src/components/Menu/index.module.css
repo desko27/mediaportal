@@ -12,7 +12,7 @@
   top: var(--h-menu-spacing);
   bottom: 0;
   right: 0;
-  width: 200px;
+  width: 210px;
   background-color: var(--c-gray);
   box-shadow: calc(-1 * var(--bxsh-width)) 0px 0px 0px rgba(var(--c-black-rgb), 0.15);
   transform: translateX(calc(100% + var(--bxsh-width)));

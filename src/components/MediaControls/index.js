@@ -1,5 +1,6 @@
 import React from 'react'
 import cx from 'classnames'
+import { FormattedMessage } from 'react-intl'
 
 import ElapsedTimeBar from './ElapsedTimeBar'
 import { ReactComponent as PlayIcon } from './icons/play.svg'
@@ -19,7 +20,7 @@ const MediaControls = ({ className, sendAction, video }) => {
   if (!video) {
     return (
       <div className={baseClass}>
-        No video selected
+        <FormattedMessage id='media-controls.no-video-selected' />
       </div>
     )
   }

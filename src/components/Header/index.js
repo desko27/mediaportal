@@ -1,5 +1,6 @@
 import React from 'react'
 import cx from 'classnames'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as XCircleIcon } from './icons/x-circle.svg'
 import { ReactComponent as MenuIcon } from './icons/menu.svg'
@@ -34,7 +35,7 @@ const Header = ({
       </button>
       <span className={styles.filesInfo}>
         {!!filesNumber && `${Math.round(progressRatio * 100)}% | `}
-        {filesNumber || '--'} files
+        {filesNumber || '--'} <FormattedMessage id='header.files' />
       </span>
       {FLEX_SPACER}
       {isUpdateAvailable && <UpdateButton onClick={performUpdate} />}
