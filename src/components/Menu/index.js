@@ -1,8 +1,8 @@
 import React from 'react'
 import cx from 'classnames'
-import { FormattedMessage } from 'react-intl'
-
+import { FormattedMessage, useIntl } from 'react-intl'
 import { version } from '../../../package.json'
+
 import MenuItem from './MenuItem'
 import styles from './index.module.css'
 
@@ -11,7 +11,10 @@ const openUrl = url => shell.openExternal(url)
 
 const FLEX_SPACER = <div style={{ flexGrow: 1, minHeight: 15 }} />
 const LINKS = {
-  USER_MANUAL: 'https://github.com/desko27/mediaportal/blob/master/README.md',
+  USER_MANUAL: locale => {
+    const localizedExtension = locale === 'en' ? '' : `.${locale}`
+    return `https://github.com/desko27/mediaportal/blob/master/README${localizedExtension}.md`
+  },
   SOURCE_CODE: 'https://github.com/desko27/mediaportal',
   REPORT_ISSUE: 'https://github.com/desko27/mediaportal/issues/new',
   SEND_COMMENTS: 'mailto:desko27@gmail.com'
@@ -20,9 +23,11 @@ const LINKS = {
 const Menu = ({
   isOpen,
   isUpdateAvailable,
+  lang,
   performUpdate,
   setIsOpen
 }) => {
+  const { locale } = useIntl()
   return (
     <div className={cx(styles.wrapper, isOpen && styles.isOpen)}>
       <div className={styles.overlay} onClick={() => setIsOpen(false)} />
@@ -32,7 +37,7 @@ const Menu = ({
             <FormattedMessage id='menu.download-update' />
           </MenuItem>
         )}
-        <MenuItem onClick={() => openUrl(LINKS.USER_MANUAL)}>
+        <MenuItem onClick={() => openUrl(LINKS.USER_MANUAL(locale))}>
           <FormattedMessage id='menu.see-user-manual' />
         </MenuItem>
         <MenuItem onClick={() => openUrl(LINKS.SOURCE_CODE)}>
