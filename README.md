@@ -28,7 +28,7 @@ Be it an image...
 
 ![Sending Content Video](https://user-images.githubusercontent.com/4168389/80231445-aa8d0e80-8653-11ea-81dd-a4bf6bc1e576.png)
 
-It's just that simple, you can start to use Media Portal now!
+It's just that simple, you can start using Media Portal now!
 
 ## FAQ
 
