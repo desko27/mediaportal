@@ -1,5 +1,6 @@
 import React from 'react'
 import cx from 'classnames'
+import { FormattedMessage } from 'react-intl'
 
 import { version } from '../../../package.json'
 import MenuItem from './MenuItem'
@@ -27,12 +28,22 @@ const Menu = ({
       <div className={styles.overlay} onClick={() => setIsOpen(false)} />
       <div className={styles.menu}>
         {isUpdateAvailable && (
-          <MenuItem hasNotification onClick={performUpdate}>Download update</MenuItem>
+          <MenuItem hasNotification onClick={performUpdate}>
+            <FormattedMessage id='menu.download-update' />
+          </MenuItem>
         )}
-        <MenuItem onClick={() => openUrl(LINKS.USER_MANUAL)}>See user manual </MenuItem>
-        <MenuItem onClick={() => openUrl(LINKS.SOURCE_CODE)}>Source code</MenuItem>
-        <MenuItem onClick={() => openUrl(LINKS.REPORT_ISSUE)}>Report an issue</MenuItem>
-        <MenuItem onClick={() => openUrl(LINKS.SEND_COMMENTS)}>Send comments</MenuItem>
+        <MenuItem onClick={() => openUrl(LINKS.USER_MANUAL)}>
+          <FormattedMessage id='menu.see-user-manual' />
+        </MenuItem>
+        <MenuItem onClick={() => openUrl(LINKS.SOURCE_CODE)}>
+          <FormattedMessage id='menu.source-code' />
+        </MenuItem>
+        <MenuItem onClick={() => openUrl(LINKS.REPORT_ISSUE)}>
+          <FormattedMessage id='menu.report-issue' />
+        </MenuItem>
+        <MenuItem onClick={() => openUrl(LINKS.SEND_COMMENTS)}>
+          <FormattedMessage id='menu.send-comments' />
+        </MenuItem>
         {FLEX_SPACER}
         <MenuItem isDisabled>v{version}</MenuItem>
       </div>

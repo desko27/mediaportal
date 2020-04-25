@@ -1,0 +1,10 @@
+{
+  "header.files": "files",
+  "header.update": "update!",
+  "menu.download-update": "Download update",
+  "menu.see-user-manual": "See user manual",
+  "menu.source-code": "Source code",
+  "menu.report-issue": "Report an issue",
+  "menu.send-comments": "Send comments",
+  "media-controls.no-video-selected": "No video selected"
+}
