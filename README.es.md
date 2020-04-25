@@ -1,6 +1,8 @@
-# Media Portal <img height="34" width="34" src="https://user-images.githubusercontent.com/4168389/80243995-80921700-8668-11ea-90ec-e19eb6c02c75.png"> <img height="30" width="30" src="https://user-images.githubusercontent.com/4168389/80243999-81c34400-8668-11ea-94b5-ad61ef3945b7.png">
+<h1 align="center">Media Portal <img height="34" width="34" src="https://user-images.githubusercontent.com/4168389/80243995-80921700-8668-11ea-90ec-e19eb6c02c75.png"> <img height="30" width="30" src="https://user-images.githubusercontent.com/4168389/80243999-81c34400-8668-11ea-94b5-ad61ef3945b7.png"></h1>
 
-> [⬇️ Descargar la aplicación](https://github.com/desko27/mediaportal/releases/latest)
+<p align="center">
+<a href="https://github.com/desko27/mediaportal/releases/latest">⏬ Descargar la aplicación</a> &nbsp;|&nbsp; <a href="https://github.com/desko27/mediaportal/blob/master/README.md">🇺🇸 Read it in English</a>
+</p>
 
 Media Portal es una aplicación para ordenador gratuita y de código abierto, que funciona tanto en sistemas Windows como en Mac.
 
