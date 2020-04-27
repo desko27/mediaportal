@@ -47,6 +47,7 @@
 }
 
 .fileButton {
+  cursor: pointer !important; /* override dragHandleProps' grab */
   display: flex;
   align-items: center;
   background-color: transparent;
