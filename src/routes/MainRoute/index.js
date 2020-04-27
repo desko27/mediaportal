@@ -1,5 +1,5 @@
-
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import { DragDropContext } from 'react-beautiful-dnd'
 
 import { version } from '../../../package.json'
 
@@ -149,6 +149,20 @@ const MainRoute = () => {
   const handleRemoveChecksClick = () => setCheckedFiles(currentFile ? [currentFile.id] : [])
   const handleRemoveChecksHover = isHover => setWillRemoveChecks(isHover)
 
+  const onFileItemDragEnd = event => {
+    const { draggableId, source, destination } = event
+    if (!destination) return
+
+    setFileList(prev => {
+      const fileListWithoutSource = prev.filter((_, index) => source.index !== index)
+      return [
+        ...fileListWithoutSource.slice(0, destination.index),
+        prev.find(file => file.id === draggableId),
+        ...fileListWithoutSource.slice(destination.index)
+      ]
+    })
+  }
+
   return (
     <div className={styles.wrapper}>
       <Header
@@ -167,16 +181,18 @@ const MainRoute = () => {
         performUpdate={performUpdate}
         setIsOpen={setIsMenuOpen}
       />
-      <FileList
-        checkedFiles={checkedFiles}
-        className={styles.fileList}
-        currentFile={currentFile}
-        fileList={fileList}
-        onDropFiles={handleDropFiles}
-        onFileClick={handleFileClick}
-        onStateClick={handleStateClick}
-        willRemoveChecks={willRemoveChecks}
-      />
+      <DragDropContext onDragEnd={onFileItemDragEnd}>
+        <FileList
+          checkedFiles={checkedFiles}
+          className={styles.fileList}
+          currentFile={currentFile}
+          fileList={fileList}
+          onDropFiles={handleDropFiles}
+          onFileClick={handleFileClick}
+          onStateClick={handleStateClick}
+          willRemoveChecks={willRemoveChecks}
+        />
+      </DragDropContext>
       <MediaControls
         className={styles.mediaControls}
         sendAction={sendAction}

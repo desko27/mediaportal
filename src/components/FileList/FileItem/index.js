@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import cx from 'classnames'
+import { Draggable } from 'react-beautiful-dnd'
 
 import { ReactComponent as RadioIcon } from './icons/radio.svg'
 import { ReactComponent as FilmIcon } from './icons/film.svg'
@@ -10,6 +11,7 @@ import styles from './index.module.css'
 
 const FileItem = ({
   file,
+  index,
   isChecked,
   isSelected,
   onFileClick,
@@ -18,7 +20,7 @@ const FileItem = ({
 }) => {
   const [isFileButtonHover, setIsFileButtonHover] = useState()
   const [isFileStateHover, setIsFileStateHover] = useState()
-  const { id, name, type } = file
+  const { name, type } = file
 
   const dotSplitedName = name.split('.')
   const hasExtension = dotSplitedName.length > 1
@@ -31,43 +33,50 @@ const FileItem = ({
   }
 
   return (
-    <div
-      className={cx(
-        styles.wrapper,
-        isSelected && styles.isSelected,
-        isChecked && styles.isChecked,
-        isFileButtonHover && styles.isFileButtonHover,
-        isFileStateHover && styles.isFileStateHover,
-        willRemoveChecks && styles.willRemoveChecks
+    <Draggable draggableId={file.id} index={index} disableInteractiveElementBlocking>
+      {(provided, snapshot) => (
+        <div
+          className={cx(
+            styles.wrapper,
+            isSelected && styles.isSelected,
+            isChecked && styles.isChecked,
+            isFileButtonHover && styles.isFileButtonHover,
+            isFileStateHover && styles.isFileStateHover,
+            willRemoveChecks && styles.willRemoveChecks,
+            snapshot.isDragging && styles.isDragging
+          )}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+        >
+          <button
+            className={styles.fileState}
+            onClick={handleStateClick}
+            onMouseEnter={() => setIsFileStateHover(true)}
+            onMouseLeave={() => setIsFileStateHover(false)}
+          >
+            {(isSelected || isFileButtonHover)
+              ? <RadioIcon />
+              : (isChecked || isFileStateHover) && <CheckIcon />}
+          </button>
+          <button
+            className={styles.fileButton}
+            onClick={() => onFileClick(file)}
+            onMouseEnter={() => setIsFileButtonHover(true)}
+            onMouseLeave={() => setIsFileButtonHover(false)}
+            {...provided.dragHandleProps}
+          >
+            <span className={styles.fileButtonType}>
+              {type === 'video' ? <FilmIcon /> : <ImageIcon />}
+            </span>
+            <span className={styles.fileButtonText}>
+              <span>{baseName}</span>
+              {extension &&
+                <span className={styles.fileButtonTextExtension}>.{extension}</span>}
+            </span>
+          </button>
+        </div>
       )}
-    >
-      <button
-        className={styles.fileState}
-        onClick={handleStateClick}
-        onMouseEnter={() => setIsFileStateHover(true)}
-        onMouseLeave={() => setIsFileStateHover(false)}
-      >
-        {(isSelected || isFileButtonHover)
-          ? <RadioIcon />
-          : (isChecked || isFileStateHover) && <CheckIcon />}
-      </button>
-      <button
-        key={id}
-        className={styles.fileButton}
-        onClick={() => onFileClick(file)}
-        onMouseEnter={() => setIsFileButtonHover(true)}
-        onMouseLeave={() => setIsFileButtonHover(false)}
-      >
-        <span className={styles.fileButtonType}>
-          {type === 'video' ? <FilmIcon /> : <ImageIcon />}
-        </span>
-        <span className={styles.fileButtonText}>
-          <span>{baseName}</span>
-          {extension &&
-            <span className={styles.fileButtonTextExtension}>.{extension}</span>}
-        </span>
-      </button>
-    </div>
+    </Draggable>
   )
 }
 

@@ -17,7 +17,7 @@ const LINKS = {
   },
   SOURCE_CODE: 'https://github.com/desko27/mediaportal',
   REPORT_ISSUE: 'https://github.com/desko27/mediaportal/issues/new',
-  SEND_COMMENTS: 'mailto:desko27@gmail.com'
+  SEND_FEEDBACK: 'mailto:desko27@gmail.com'
 }
 
 const Menu = ({
@@ -46,8 +46,8 @@ const Menu = ({
         <MenuItem onClick={() => openUrl(LINKS.REPORT_ISSUE)}>
           <FormattedMessage id='menu.report-issue' />
         </MenuItem>
-        <MenuItem onClick={() => openUrl(LINKS.SEND_COMMENTS)}>
-          <FormattedMessage id='menu.send-comments' />
+        <MenuItem onClick={() => openUrl(LINKS.SEND_FEEDBACK)}>
+          <FormattedMessage id='menu.send-feedback' />
         </MenuItem>
         {FLEX_SPACER}
         <MenuItem isDisabled>v{version}</MenuItem>
