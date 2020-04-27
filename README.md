@@ -50,3 +50,6 @@ Indeed, for the most demanding ones, Media Portal offers the possibility to cont
 | <kbd>SHIFT</kbd> + <kbd>ALT</kbd> + <kbd>A</kbd> | Send next content |
 | <kbd>SHIFT</kbd> + <kbd>ALT</kbd> + <kbd>0</kbd> | Stop sending current content |
 | <kbd>SHIFT</kbd> + <kbd>ALT</kbd> + <kbd>[1-9]</kbd> | Send content on desired position |
+
+### How can I reorder the list of files?
+The list of files is ordered alphabetically by default, that's why it's recommended that all your files are named with a numeric prefix beforehand, for instance. But you may prefer to keep the original file names or making last minute moves. That's the reason why, once the list of files is loaded, you can just drag any of them to another position.

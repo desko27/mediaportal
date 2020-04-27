@@ -51,3 +51,6 @@ Efectivamente, para los más exigentes, Media Portal ofrece la posibilidad de co
 | <kbd>SHIFT</kbd> + <kbd>ALT</kbd> + <kbd>A</kbd> | Envía el contenido siguiente |
 | <kbd>SHIFT</kbd> + <kbd>ALT</kbd> + <kbd>0</kbd> | Deja de enviar el contenido actual |
 | <kbd>SHIFT</kbd> + <kbd>ALT</kbd> + <kbd>[1-9]</kbd> | Envía el contenido de la posición deseada |
+
+### ¿Cómo reordeno la lista de archivos?
+La lista de archivos se ordena automáticamente por orden alfabético, por eso la recomendación es que todos tus archivos estén nombrados de antemano con un prefijo numérico, por ejemplo. Pero quizá prefieras mantener los nombres originales de los archivos o hacer movimientos de última hora. Es por esto que, una vez cargada la lista de archivos, puedes simplemente arrastrar cualquiera de ellos a otra posición.
