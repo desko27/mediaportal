@@ -34,7 +34,7 @@ const FileItem = ({
 
   return (
     <Draggable draggableId={file.id} index={index} disableInteractiveElementBlocking>
-      {provided => (
+      {(provided, snapshot) => (
         <div
           className={cx(
             styles.wrapper,
@@ -42,7 +42,8 @@ const FileItem = ({
             isChecked && styles.isChecked,
             isFileButtonHover && styles.isFileButtonHover,
             isFileStateHover && styles.isFileStateHover,
-            willRemoveChecks && styles.willRemoveChecks
+            willRemoveChecks && styles.willRemoveChecks,
+            snapshot.isDragging && styles.isDragging
           )}
           ref={provided.innerRef}
           {...provided.draggableProps}

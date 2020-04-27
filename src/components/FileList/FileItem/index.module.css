@@ -9,6 +9,10 @@
 }
 .wrapper.isFileButtonHover:not(.isSelected) {
   --c-local-gray: var(--c-primary-gray);
+  background-color: var(--c-accent-light);
+}
+.wrapper.isDragging {
+  --c-local-gray: var(--c-primary-gray);
   background-color: var(--c-accent);
 }
 
