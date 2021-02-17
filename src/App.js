@@ -7,8 +7,9 @@ import PortalRoute from './routes/PortalRoute'
 
 import en from './translations/en.json'
 import es from './translations/es.json'
+import pt from './translations/pt.json'
 
-const translations = { en, es }
+const translations = { en, es, pt }
 const availableLanguages = Object.keys(translations)
 
 // get language without region code from browser
