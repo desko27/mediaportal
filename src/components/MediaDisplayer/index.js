@@ -6,7 +6,8 @@ const MediaDisplayer = ({
   displayerRef = {},
   file,
   isMuted,
-  onVideoUpdate = () => {}
+  onVideoUpdate = () => {},
+  playbackRate
 }) => {
   const videoRef = useRef()
 
@@ -33,6 +34,10 @@ const MediaDisplayer = ({
     if (!file) return
     if (file.type === 'video') {
       const video = videoRef.current
+
+      if (playbackRate) {
+        video.defaultPlaybackRate = playbackRate
+      }
 
       const timeupdateListener = () => {
         const elapsedTime = video.currentTime
