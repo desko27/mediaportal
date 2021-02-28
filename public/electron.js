@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Menu, globalShortcut } = require('electron')
+const { app, BrowserWindow, ipcMain, Menu, globalShortcut, protocol } = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
 
@@ -53,6 +53,11 @@ function createPortalWindow () {
 }
 
 app.on('ready', () => {
+  protocol.registerFileProtocol('file', (request, callback) => {
+    const pathname = decodeURI(request.url.replace('file:///', ''))
+    callback(pathname)
+  })
+
   const portalWindow = createPortalWindow()
   const mainWindow = createMainWindow(portalWindow)
 
