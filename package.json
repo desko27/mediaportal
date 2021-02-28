@@ -40,25 +40,25 @@
     ]
   },
   "dependencies": {
-    "classnames": "^2.2.6",
-    "cross-env": "^7.0.2",
+    "classnames": "2.2.6",
+    "cross-env": "7.0.2",
     "electron-is-dev": "1.1.0",
-    "electron-log": "^4.1.1",
-    "react": "^16.8.6",
-    "react-beautiful-dnd": "^13.0.0",
-    "react-dom": "^16.8.6",
-    "react-dropzone": "^10.2.2",
-    "react-intl": "^4.5.0",
-    "react-router-dom": "^5.1.2"
+    "electron-log": "4.1.1",
+    "react": "16.8.6",
+    "react-beautiful-dnd": "13.0.0",
+    "react-dom": "16.8.6",
+    "react-dropzone": "10.2.2",
+    "react-intl": "4.5.0",
+    "react-router-dom": "5.1.2"
   },
   "devDependencies": {
-    "concurrently": "^5.1.0",
-    "electron": "^8.2.0",
-    "electron-builder": "^22.4.1",
-    "husky": "^4.2.3",
-    "react-scripts": "^3.4.1",
-    "standard": "^14.3.3",
-    "wait-on": "^4.0.1"
+    "concurrently": "5.1.0",
+    "electron": "8.2.0",
+    "electron-builder": "22.4.1",
+    "husky": "4.2.3",
+    "react-scripts": "3.4.1",
+    "standard": "14.3.3",
+    "wait-on": "4.0.1"
   },
   "main": "public/electron.js",
   "homepage": "./",
