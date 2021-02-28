@@ -8,7 +8,7 @@ import styles from './index.module.css'
 
 const FileList = ({
   checkedFiles,
-  className,
+  className: classNameProp,
   currentFile,
   fileList,
   onDropFiles,
@@ -17,9 +17,10 @@ const FileList = ({
   willRemoveChecks
 }) => {
   const { getRootProps, isDragActive } = useDropzone({ onDrop: onDropFiles })
+  const className = cx(styles.wrapper, classNameProp, isDragActive && styles.draggingPlaceholder)
 
   return (
-    <div {...getRootProps({ className: cx(styles.wrapper, className, isDragActive && styles.draggingPlaceholder) })}>
+    <div {...getRootProps({ className })}>
       {!isDragActive && (
         <Droppable droppableId='file-list'>
           {provided => (

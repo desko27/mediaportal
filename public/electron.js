@@ -11,7 +11,11 @@ const webPreferences = {
   autoplayPolicy: 'no-user-gesture-required'
 }
 
-const commonWindowOptions = { webPreferences, show: false }
+const commonWindowOptions = {
+  webPreferences,
+  acceptFirstMouse: true,
+  show: false
+}
 
 function getAppUrl (route) {
   return isDev
