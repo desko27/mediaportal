@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Menu, globalShortcut } = require('electron')
+const { app, BrowserWindow, ipcMain, Menu, globalShortcut, protocol } = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
 
@@ -53,11 +53,16 @@ function createPortalWindow () {
 }
 
 app.on('ready', () => {
+  protocol.registerFileProtocol('file', (request, callback) => {
+    const pathname = decodeURI(request.url.replace('file:///', ''))
+    callback(pathname)
+  })
+
   const portalWindow = createPortalWindow()
   const mainWindow = createMainWindow(portalWindow)
 
   // register shortcuts
-  Array(10).fill().map((_, number) => {
+  Array(10).fill().forEach((_, number) => {
     globalShortcut.register(`Alt+Shift+${number}`, () => {
       mainWindow.webContents.send('global-shortcut', {
         type: 'cast-resource',
