@@ -1,11 +1,15 @@
-<h1 align="center">Media Portal <img height="34" width="34" src="https://user-images.githubusercontent.com/4168389/80243995-80921700-8668-11ea-90ec-e19eb6c02c75.png"> <img height="30" width="30" src="https://user-images.githubusercontent.com/4168389/80243999-81c34400-8668-11ea-94b5-ad61ef3945b7.png">&nbsp;</h1>
+<h1 align="center">Media Portal <img height="34" width="34" src="https://user-images.githubusercontent.com/4168389/80243995-80921700-8668-11ea-90ec-e19eb6c02c75.png"> <img height="30" width="30" src="https://user-images.githubusercontent.com/4168389/80243999-81c34400-8668-11ea-94b5-ad61ef3945b7.png"></h1>
+
+<p align="center">
+  【🇬🇧 🇪🇸 🇧🇷】<a href="https://github.com/desko27/mediaportal/blob/master/README.es.md">🇪🇸 Leer</a> <a href="https://github.com/desko27/mediaportal/blob/master/README.pt-br.md">🇧🇷 Leia</a>
+</p>
 
 <p align="center">
 <img height="128" width="128" src="https://user-images.githubusercontent.com/4168389/80284013-e7243d00-871b-11ea-959b-e4edb10c47d3.png">
 </p>
 
 <p align="center">
-<a href="https://github.com/desko27/mediaportal/releases/latest">⏬ Download the app</a> &nbsp;|&nbsp; <a href="https://github.com/desko27/mediaportal/blob/master/README.es.md">🇪🇸 Leer en Español</a>
+<a href="https://github.com/desko27/mediaportal/releases/latest">⏬ Download the app</a>
 </p>
 
 Media Portal is a free and open source computer application which works on Windows systems as well as on Mac.
