@@ -59,16 +59,18 @@ const MediaDisplayer = ({
   const { name, type, path } = file || {}
   const webPath = path && `file://${path}`
 
+  const videoNode = (
+    <video ref={videoRef} muted={isMuted}>
+      <source src={webPath} />
+    </video>
+  )
+
   return (
     <div className={styles.wrapper}>
       {file && (
         type === 'image'
           ? <img src={webPath} alt={name} draggable={false} />
-          : (
-            <video ref={videoRef} muted={isMuted}>
-              <source src={webPath} />
-            </video>
-          )
+          : videoNode
       )}
     </div>
   )

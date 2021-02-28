@@ -35,13 +35,15 @@ const PortalRoute = () => {
           resource: {
             type: file.type
           },
-          ...(file.type === 'video' ? {
-            video: {
-              elapsedTime: 0,
-              elapsedRatio: 0,
-              isPaused: false
-            }
-          } : {})
+          ...(file.type === 'video'
+            ? {
+                video: {
+                  elapsedTime: 0,
+                  elapsedRatio: 0,
+                  isPaused: false
+                }
+              }
+            : {})
         }
       )
     }
