@@ -22,7 +22,7 @@
   height: 35px;
   width: calc(22px + 2 * 7px);
   padding: 0 7px;
-  margin: 0 7px;
+  margin-left: 7px;
 
   flex-shrink: 0;
   display: flex;
@@ -69,8 +69,18 @@
 }
 
 .fileButtonType {
+  cursor: zoom-in;
+
   line-height: 0;
-  margin-right: 12px;
+  height: 35px;
+  margin-right: 5px;
+  padding: 0 7px;
+
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 .fileButtonType {
   color: var(--c-local-gray);

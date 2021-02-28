@@ -9,7 +9,11 @@ const KEYCODES = { ESCAPE: 27, INTRO: 13 }
 
 const PortalRoute = () => {
   const [currentFile, setCurrentFile] = useState()
+  const currentFileRef = useRef()
   const displayerRef = useRef()
+
+  // create a reference to check outdated events in handlers
+  currentFileRef.current = currentFile
 
   useLayoutEffect(() => {
     // show window when mounted
@@ -62,7 +66,11 @@ const PortalRoute = () => {
     }
   }, [])
 
-  const handleVideoUpdate = updatedState => {
+  const handleVideoUpdate = (fileToCheck, updatedState) => {
+    // Do not send event if file is no longer the same
+    // (prevents issues with outdated video events)
+    if (fileToCheck !== currentFileRef.current) return
+
     ipcRenderer.send(
       'portal-state-update',
       {

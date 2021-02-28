@@ -3,8 +3,9 @@ import React, { useEffect, useRef } from 'react'
 import styles from './index.module.css'
 
 const MediaDisplayer = ({
-  displayerRef,
+  displayerRef = {},
   file,
+  isMuted,
   onVideoUpdate = () => {}
 }) => {
   const videoRef = useRef()
@@ -38,7 +39,7 @@ const MediaDisplayer = ({
         const elapsedRatioCalc = video.currentTime / video.duration
         const elapsedRatio = isNaN(elapsedRatioCalc) ? 0 : elapsedRatioCalc
 
-        onVideoUpdate({
+        onVideoUpdate(file, {
           elapsedTime,
           elapsedRatio,
           isPaused: video.paused
@@ -64,7 +65,7 @@ const MediaDisplayer = ({
         type === 'image'
           ? <img src={webPath} alt={name} draggable={false} />
           : (
-            <video ref={videoRef}>
+            <video ref={videoRef} muted={isMuted}>
               <source src={webPath} />
             </video>
           )
