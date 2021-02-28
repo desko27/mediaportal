@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import MediaDisplayer from '../../components/MediaDisplayer'
 
 import styles from './index.module.css'
 
@@ -8,7 +9,11 @@ const KEYCODES = { ESCAPE: 27, INTRO: 13 }
 
 const PortalRoute = () => {
   const [currentFile, setCurrentFile] = useState()
-  const videoRef = useRef()
+  const currentFileRef = useRef()
+  const displayerRef = useRef()
+
+  // create a reference to check outdated events in handlers
+  currentFileRef.current = currentFile
 
   useLayoutEffect(() => {
     // show window when mounted
@@ -40,24 +45,14 @@ const PortalRoute = () => {
         }
       )
     }
+
+    const handleVideoAction = (event, action) => {
+      displayerRef.current.triggerVideoAction(action)
+    }
+
     const handleKeydown = event => {
       if (event.keyCode === KEYCODES.ESCAPE) ipcRenderer.send('portal-fullscreen', false)
       if (event.keyCode === KEYCODES.INTRO) ipcRenderer.send('portal-fullscreen', true)
-    }
-
-    const handleVideoAction = (event, action) => {
-      const video = videoRef.current
-      const { type, args } = action
-
-      // special managed actions
-      if (type === 'setElapsedRatio') {
-        const [wantedRatio] = args
-        video.currentTime = wantedRatio * video.duration
-        return
-      }
-
-      // directly mirrored media element functions
-      video[type](...args)
     }
 
     ipcRenderer.on('portal-resource', handlePortalResource)
@@ -71,56 +66,29 @@ const PortalRoute = () => {
     }
   }, [])
 
-  useEffect(() => {
-    if (!currentFile) return
-    if (currentFile.type === 'video') {
-      const video = videoRef.current
+  const handleVideoUpdate = (fileToCheck, updatedState) => {
+    // Do not send event if file is no longer the same
+    // (prevents issues with outdated video events)
+    if (fileToCheck !== currentFileRef.current) return
 
-      const timeupdateListener = () => {
-        const elapsedTime = video.currentTime
-        const elapsedRatioCalc = video.currentTime / video.duration
-        const elapsedRatio = isNaN(elapsedRatioCalc) ? 0 : elapsedRatioCalc
-
-        ipcRenderer.send(
-          'portal-state-update',
-          {
-            resource: {
-              type: 'video'
-            },
-            video: {
-              elapsedTime,
-              elapsedRatio,
-              isPaused: video.paused
-            }
-          }
-        )
+    ipcRenderer.send(
+      'portal-state-update',
+      {
+        resource: { type: 'video' },
+        video: updatedState
       }
-      video.addEventListener('timeupdate', timeupdateListener)
-      video.load()
-      video.play()
-
-      return () => {
-        video.removeEventListener('timeupdate', timeupdateListener)
-      }
-    }
-  }, [currentFile])
+    )
+  }
 
   const handleDoubleClick = () => ipcRenderer.send('portal-fullscreen', 'toggle')
 
-  const { name, type, path } = currentFile || {}
-  const webPath = path && `file://${path}`
-
   return (
     <div className={styles.wrapper} onDoubleClick={handleDoubleClick}>
-      {currentFile && (
-        type === 'image'
-          ? <img src={webPath} alt={name} />
-          : (
-            <video ref={videoRef}>
-              <source src={webPath} />
-            </video>
-          )
-      )}
+      <MediaDisplayer
+        displayerRef={displayerRef}
+        file={currentFile}
+        onVideoUpdate={handleVideoUpdate}
+      />
     </div>
   )
 }

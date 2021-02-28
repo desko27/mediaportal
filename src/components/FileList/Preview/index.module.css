@@ -1,0 +1,12 @@
+.wrapper {
+  width: 192px;
+  height: 108px;
+  position: fixed;
+  bottom: calc(36px + 15px);
+  right: 15px;
+  box-sizing: content-box;
+  border: 1px solid var(--c-black);
+  border-radius: 8px;
+  overflow: hidden;
+  pointer-events: none;
+}
