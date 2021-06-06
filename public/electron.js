@@ -63,7 +63,7 @@ app.on('ready', () => {
   const mainWindow = createMainWindow(portalWindow)
 
   // register shortcuts
-  Array(10).fill().map((_, number) => {
+  Array(10).fill().forEach((_, number) => {
     globalShortcut.register(`Alt+Shift+${number}`, () => {
       mainWindow.webContents.send('global-shortcut', {
         type: 'cast-resource',
