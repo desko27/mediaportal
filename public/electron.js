@@ -8,6 +8,7 @@ if (!isDev) Menu.setApplicationMenu(false)
 const webPreferences = {
   nodeIntegration: true,
   webSecurity: false,
+  preload: path.join(__dirname, 'preload.js'),
   autoplayPolicy: 'no-user-gesture-required'
 }
 
