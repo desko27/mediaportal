@@ -53,8 +53,8 @@
   },
   "devDependencies": {
     "concurrently": "6.0.0",
-    "electron": "11.3.0",
     "electron-builder": "22.9.1",
+    "electron": "13.1.0",
     "husky": "4.3.8",
     "react-scripts": "4.0.3",
     "standard": "16.0.3",

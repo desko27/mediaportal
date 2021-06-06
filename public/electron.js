@@ -8,6 +8,7 @@ if (!isDev) Menu.setApplicationMenu(false)
 const webPreferences = {
   nodeIntegration: true,
   webSecurity: false,
+  preload: path.join(__dirname, 'preload.js'),
   autoplayPolicy: 'no-user-gesture-required'
 }
 
@@ -42,6 +43,7 @@ function createPortalWindow () {
   const window = new BrowserWindow({
     title: 'Portal',
     frame: false,
+    roundedCorners: false,
     width: 768,
     height: 432,
     closable: false,

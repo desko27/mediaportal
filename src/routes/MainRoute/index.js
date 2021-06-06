@@ -10,7 +10,7 @@ import MediaControls from '../../components/MediaControls'
 
 import styles from './index.module.css'
 
-const { ipcRenderer, shell } = window.require('electron')
+const { ipcRenderer, shell } = window.electron
 const openUrl = url => shell.openExternal(url)
 
 const performUpdate = () => openUrl('https://github.com/desko27/mediaportal/releases/latest')
