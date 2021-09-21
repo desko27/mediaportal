@@ -3,7 +3,7 @@ import MediaDisplayer from '../../components/MediaDisplayer'
 
 import styles from './index.module.css'
 
-const { ipcRenderer } = window.require('electron')
+const { ipcRenderer } = window.electron
 
 const KEYCODES = { ESCAPE: 27, INTRO: 13 }
 

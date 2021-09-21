@@ -6,7 +6,7 @@ import { version } from '../../../package.json'
 import MenuItem from './MenuItem'
 import styles from './index.module.css'
 
-const { shell } = window.require('electron')
+const { shell } = window.electron
 const openUrl = url => shell.openExternal(url)
 
 const FLEX_SPACER = <div style={{ flexGrow: 1, minHeight: 15 }} />
