@@ -37,7 +37,8 @@
       ]
     },
     "files": [
-      "build/icon.*"
+      "build/**/*",
+      "public/**/*"
     ]
   },
   "dependencies": {

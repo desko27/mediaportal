@@ -4,6 +4,7 @@ import svgrPlugin from 'vite-plugin-svgr'
 
 export default defineConfig({
   plugins: [react(), svgrPlugin()],
+  base: './',
   build: {
     outDir: 'build'
   }
