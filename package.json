@@ -10,7 +10,8 @@
     "electron-start": "electron . --allow-file-access-from-files",
     "electron-build": "electron-builder --mac --win",
     "build": "npm run react-build && npm run electron-build",
-    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && npm run electron-start\"",
+    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"npm run wait-on-react && npm run electron-start\"",
+    "wait-on-react": "wait-on -c wait-on.config.json http-get://localhost:3000",
     "lint": "npx standard",
     "phoenix": "rm -rf ./node_modules && npm install"
   },
