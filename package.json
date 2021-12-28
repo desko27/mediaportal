@@ -5,12 +5,13 @@
   "version": "2.6.0",
   "private": true,
   "scripts": {
-    "react-start": "react-scripts start",
-    "react-build": "react-scripts build",
-    "react-eject": "react-scripts eject",
+    "react-start": "vite",
+    "react-build": "vite build",
+    "electron-start": "electron . --allow-file-access-from-files",
     "electron-build": "electron-builder --mac --win",
     "build": "npm run react-build && npm run electron-build",
-    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron . --allow-file-access-from-files\"",
+    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"npm run wait-on-react && npm run electron-start\"",
+    "wait-on-react": "wait-on -c wait-on.config.json http-get://localhost:3000",
     "lint": "npx standard",
     "phoenix": "rm -rf ./node_modules && npm install"
   },
@@ -37,7 +38,8 @@
       ]
     },
     "files": [
-      "build/icon.*"
+      "build/**/*",
+      "public/**/*"
     ]
   },
   "dependencies": {
@@ -53,12 +55,14 @@
     "react-router-dom": "5.3.0"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "1.0.2",
     "concurrently": "6.2.1",
     "electron": "15.1.0",
     "electron-builder": "22.11.7",
     "husky": "4.3.8",
-    "react-scripts": "4.0.3",
     "standard": "16.0.3",
+    "vite": "2.6.5",
+    "vite-plugin-svgr": "0.4.0",
     "wait-on": "6.0.0"
   },
   "main": "public/electron.js",
