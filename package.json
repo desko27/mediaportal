@@ -2,7 +2,7 @@
   "name": "mediaportal",
   "description": "Portal for media",
   "author": "desko27",
-  "version": "2.6.0",
+  "version": "2.6.1",
   "private": true,
   "scripts": {
     "react-start": "vite",
@@ -13,6 +13,8 @@
     "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"npm run wait-on-react && npm run electron-start\"",
     "wait-on-react": "wait-on -c wait-on.config.json http-get://localhost:3000",
     "lint": "npx standard",
+    "bump": "npm version minor -m \"Bump version: %s\"",
+    "bump:patch": "npm version patch -m \"Bump version: %s\"",
     "phoenix": "rm -rf ./node_modules && npm install"
   },
   "husky": {
@@ -69,7 +71,7 @@
   "homepage": "./",
   "engines": {
     "node": "16",
-    "npm": "7"
+    "npm": ">=7"
   },
   "browserslist": {
     "production": [
