@@ -49,9 +49,9 @@
     "cross-env": "7.0.3",
     "electron-is-dev": "2.0.0",
     "electron-log": "4.4.1",
-    "react": "17.0.2",
+    "react": "18.0.0",
     "react-beautiful-dnd": "13.1.0",
-    "react-dom": "17.0.2",
+    "react-dom": "18.0.0",
     "react-dropzone": "11.4.0",
     "react-intl": "5.20.10",
     "react-router-dom": "5.3.0"
