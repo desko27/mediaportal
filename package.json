@@ -4,6 +4,7 @@
   "author": "desko27",
   "version": "2.6.2",
   "private": true,
+  "main": "public/electron.js",
   "scripts": {
     "react-start": "vite",
     "react-build": "vite build",
@@ -67,22 +68,8 @@
     "vite-plugin-svgr": "1.1.0",
     "wait-on": "6.0.1"
   },
-  "main": "public/electron.js",
-  "homepage": "./",
   "engines": {
     "node": "16",
     "npm": ">=7"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }
