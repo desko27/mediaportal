@@ -1,5 +1,5 @@
 import React from 'react'
-import cx from 'classnames'
+import cx from 'clsx'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { version } from '../../../package.json'
 
