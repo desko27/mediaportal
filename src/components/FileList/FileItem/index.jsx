@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import cx from 'classnames'
+import cx from 'clsx'
 import { Draggable } from 'react-beautiful-dnd'
 
 import Preview from '../Preview'
