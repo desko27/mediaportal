@@ -38,7 +38,8 @@
     },
     "files": [
       "build/**/*",
-      "public/**/*"
+      "public/**/*",
+      "src/main/**/*"
     ]
   },
   "dependencies": {
