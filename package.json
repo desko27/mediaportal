@@ -16,12 +16,8 @@
     "lint": "npx standard",
     "bump": "npm version minor -m \"Bump version: %s\"",
     "bump:patch": "npm version patch -m \"Bump version: %s\"",
-    "phoenix": "rm -rf ./node_modules && npm install"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
+    "phoenix": "rm -rf ./node_modules && npm install",
+    "prepare": "husky install"
   },
   "build": {
     "mac": {
@@ -62,7 +58,7 @@
     "concurrently": "7.1.0",
     "electron": "18.0.3",
     "electron-builder": "23.0.3",
-    "husky": "4.3.8",
+    "husky": "7.0.4",
     "standard": "16.0.4",
     "vite": "2.9.1",
     "vite-plugin-svgr": "1.1.0",
