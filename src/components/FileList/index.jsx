@@ -16,7 +16,7 @@ const FileList = ({
   onStateClick,
   willRemoveChecks
 }) => {
-  const { getRootProps, isDragActive } = useDropzone({ onDrop: onDropFiles })
+  const { getRootProps, isDragActive } = useDropzone({ onDrop: onDropFiles, noClick: true })
   const className = cx(styles.wrapper, classNameProp, isDragActive && styles.draggingPlaceholder)
 
   return (
