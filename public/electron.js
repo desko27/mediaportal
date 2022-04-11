@@ -20,7 +20,7 @@ const commonWindowOptions = {
 
 function getAppUrl (route) {
   return isDev
-    ? `http://localhost:3000/#${route}`
+    ? `http://localhost:3000/#/${route}`
     : `file://${path.join(__dirname, '../build/index.html')}#/${route}`
 }
 

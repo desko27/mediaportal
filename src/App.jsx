@@ -1,5 +1,5 @@
 import React from 'react'
-import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import { IntlProvider } from 'react-intl'
 
 import MainRoute from './routes/MainRoute'
@@ -24,16 +24,12 @@ const language = availableLanguages.includes(browserLanguage) ? browserLanguage 
 const App = () => {
   return (
     <IntlProvider locale={language} messages={translations[language]}>
-      <Router>
-        <Switch>
-          <Route path='/main'>
-            <MainRoute />
-          </Route>
-          <Route path='/portal'>
-            <PortalRoute />
-          </Route>
-        </Switch>
-      </Router>
+      <HashRouter>
+        <Routes>
+          <Route path='main' element={<MainRoute />} />
+          <Route path='portal' element={<PortalRoute />} />
+        </Routes>
+      </HashRouter>
     </IntlProvider>
   )
 }
