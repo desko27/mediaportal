@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 
-import { version } from '../../../package.json'
+import { version } from '../../../../package.json'
 
 import Header from '../../components/Header'
 import Menu from '../../components/Menu'

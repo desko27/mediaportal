@@ -4,7 +4,7 @@
   "author": "desko27",
   "version": "2.6.2",
   "private": true,
-  "main": "public/electron.js",
+  "main": "src/main/index.js",
   "scripts": {
     "react-start": "vite",
     "react-build": "vite build",
