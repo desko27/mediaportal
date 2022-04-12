@@ -15,7 +15,7 @@ const openUrl = url => shell.openExternal(url)
 
 const performUpdate = () => openUrl('https://github.com/desko27/mediaportal/releases/latest')
 
-const MainRoute = () => {
+export default function ControlsRoute () {
   const [isUpdateAvailable, setIsUpdateAvailable] = useState()
   const [fileList, setFileList] = useState([])
   const [checkedFiles, setCheckedFiles] = useState([])
@@ -26,7 +26,7 @@ const MainRoute = () => {
 
   useLayoutEffect(() => {
     // show window when mounted
-    ipcRenderer.send('main-window-ready')
+    ipcRenderer.send('controls-window-ready')
   }, [])
 
   // check for updates once at startup
@@ -201,5 +201,3 @@ const MainRoute = () => {
     </div>
   )
 }
-
-export default MainRoute
