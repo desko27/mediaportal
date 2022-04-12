@@ -6,41 +6,26 @@
   "private": true,
   "main": "src/main/index.js",
   "scripts": {
-    "react-start": "vite",
-    "react-build": "vite build",
-    "electron-start": "electron . --allow-file-access-from-files",
-    "electron-build": "electron-builder --mac --win",
-    "build": "npm run react-build && npm run electron-build",
-    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"npm run wait-on-react && npm run electron-start\"",
-    "wait-on-react": "wait-on -c wait-on.config.json http-get://localhost:3000",
+    "react:dev": "vite",
+    "react:build": "vite build",
+    "electron:dev": "electron . --allow-file-access-from-files",
+    "electron:build": "electron-builder --mac --win",
+    "electron:build:debug": "electron-builder --mac -c electron-builder.debug.json",
+    "build": "npm run react:build && npm run electron:build",
+    "build:debug": "npm run react:build && npm run electron:build:debug",
+    "launch": "open dist/mac/mediaportal.app",
+    "launch:debug": "lldb dist/mac/mediaportal.app --one-line \"run --debug-mode\"",
+    "start": "npm run dev",
+    "dev": "concurrently \"npm run dev:react\" \"npm run dev:electron\"",
+    "dev:debug": "concurrently \"npm run dev:react\" \"npm run dev:electron -- --debug-mode\"",
+    "dev:react": "cross-env BROWSER=none npm run react:dev --",
+    "dev:electron": "npm run dev:await-react && npm run electron:dev --",
+    "dev:await-react": "wait-on -c wait-on.config.json http-get://localhost:3000",
     "lint": "npx standard",
     "bump": "npm version minor -m \"Bump version: %s\"",
     "bump:patch": "npm version patch -m \"Bump version: %s\"",
     "phoenix": "rm -rf ./node_modules && npm install",
     "prepare": "husky install"
-  },
-  "build": {
-    "mac": {
-      "icon": "./build/icon.icns",
-      "target": "dmg"
-    },
-    "win": {
-      "icon": "./build/icon.png",
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64",
-            "ia32"
-          ]
-        }
-      ]
-    },
-    "files": [
-      "build/**/*",
-      "public/**/*",
-      "src/main/**/*"
-    ]
   },
   "dependencies": {
     "clsx": "1.1.1",

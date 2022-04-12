@@ -1,0 +1,23 @@
+{
+  "mac": {
+    "icon": "./assets/icon.icns",
+    "target": "dmg"
+  },
+  "win": {
+    "icon": "./assets/icon.png",
+    "target": [
+      {
+        "target": "nsis",
+        "arch": [
+          "x64",
+          "ia32"
+        ]
+      }
+    ]
+  },
+  "files": [
+    "build/**/*",
+    "assets/**/*",
+    "src/main/**/*"
+  ]
+}

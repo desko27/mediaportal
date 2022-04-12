@@ -15,13 +15,17 @@ const webPreferences = {
 const commonWindowOptions = {
   webPreferences,
   acceptFirstMouse: true,
-  show: false
+  show: app.commandLine.hasSwitch('debug-mode')
 }
 
 function getAppUrl (route) {
   return isDev
     ? `http://localhost:3000/#/${route}`
-    : `file://${path.join(__dirname, '../build/index.html')}#/${route}`
+    /**
+     * BE AWARE:
+     * __dirname === 'dist/mac/mediaportal.app/Contents/Resources/app/src/main/'
+     */
+    : `file://${path.join(__dirname, '../../build/index.html')}#/${route}`
 }
 
 function createMainWindow (portalWindow) {
@@ -62,6 +66,10 @@ app.on('ready', () => {
 
   const portalWindow = createPortalWindow()
   const mainWindow = createMainWindow(portalWindow)
+
+  if (app.commandLine.hasSwitch('debug-mode')) {
+    mainWindow.webContents.openDevTools()
+  }
 
   // register shortcuts
   Array(10).fill().forEach((_, number) => {
