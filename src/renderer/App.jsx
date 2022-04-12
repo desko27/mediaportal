@@ -2,7 +2,7 @@ import React from 'react'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import { IntlProvider } from 'react-intl'
 
-import MainRoute from './routes/MainRoute'
+import ControlsRoute from './routes/ControlsRoute'
 import PortalRoute from './routes/PortalRoute'
 
 import en from './translations/en.json'
@@ -26,7 +26,7 @@ const App = () => {
     <IntlProvider locale={language} messages={translations[language]}>
       <HashRouter>
         <Routes>
-          <Route path='main' element={<MainRoute />} />
+          <Route path='controls' element={<ControlsRoute />} />
           <Route path='portal' element={<PortalRoute />} />
         </Routes>
       </HashRouter>
