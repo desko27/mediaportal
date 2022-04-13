@@ -1,7 +1,9 @@
-const { app, BrowserWindow } = require('electron')
-const { commonWindowOptions, getAppUrl } = require('./common')
+import { app, BrowserWindow } from 'electron'
+import { commonWindowOptions, getAppUrl } from './common'
 
-module.exports.createControlsWindow = (portalWindow) => {
+export const createControlsWindow = (
+  portalWindow: Electron.BrowserWindow
+): Electron.BrowserWindow => {
   const window = new BrowserWindow({
     title: 'Media Portal',
     width: 350,
@@ -9,7 +11,7 @@ module.exports.createControlsWindow = (portalWindow) => {
     ...commonWindowOptions
   })
 
-  window.loadURL(getAppUrl('controls'))
+  void window.loadURL(getAppUrl('controls'))
 
   window.on('closed', () => {
     portalWindow.destroy()

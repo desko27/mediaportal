@@ -1,12 +1,25 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import cx from 'clsx'
 
 import styles from './index.module.css'
 
-const ElapsedTimeBar = ({ className, elapsedRatio = 0, isPaused, onClick }) => {
-  const ref = useRef()
+interface Props {
+  className: string
+  elapsedRatio: number
+  isPaused: boolean
+  onClick: ({ wantedRatio }: { wantedRatio: number }) => void
+}
 
-  const handleClick = e => {
+export default function ElapsedTimeBar ({
+  className,
+  elapsedRatio = 0,
+  isPaused,
+  onClick
+}: Props): JSX.Element {
+  const ref = useRef<HTMLDivElement>(null)
+
+  const handleClick: React.MouseEventHandler<HTMLDivElement> = e => {
+    if (ref.current === null) return
     const elementWidth = ref.current.offsetWidth
     const elementX = ref.current.offsetLeft
     const mouseX = e.clientX
@@ -23,5 +36,3 @@ const ElapsedTimeBar = ({ className, elapsedRatio = 0, isPaused, onClick }) => {
     />
   )
 }
-
-export default ElapsedTimeBar

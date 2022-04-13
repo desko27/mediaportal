@@ -1,4 +1,3 @@
-import React from 'react'
 import cx from 'clsx'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { version } from '../../../../package.json'
@@ -6,12 +5,19 @@ import { version } from '../../../../package.json'
 import MenuItem from './MenuItem'
 import styles from './index.module.css'
 
+interface Props {
+  isOpen: boolean
+  isUpdateAvailable: boolean
+  performUpdate: () => void
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
 const { shell } = window.electron
-const openUrl = url => shell.openExternal(url)
+const openUrl = (url: string): void => shell.openExternal(url)
 
 const FLEX_SPACER = <div style={{ flexGrow: 1, minHeight: 15 }} />
 const LINKS = {
-  USER_MANUAL: locale => {
+  USER_MANUAL: (locale: string) => {
     const localizedExtension = locale === 'en' ? '' : `.${locale}`
     return `https://github.com/desko27/mediaportal/blob/master/README${localizedExtension}.md`
   },
@@ -20,13 +26,12 @@ const LINKS = {
   SEND_FEEDBACK: 'mailto:desko27@gmail.com'
 }
 
-const Menu = ({
+export default function Menu ({
   isOpen,
   isUpdateAvailable,
-  lang,
   performUpdate,
   setIsOpen
-}) => {
+}: Props): JSX.Element {
   const { locale } = useIntl()
   return (
     <div className={cx(styles.wrapper, isOpen && styles.isOpen)}>
@@ -55,5 +60,3 @@ const Menu = ({
     </div>
   )
 }
-
-export default Menu

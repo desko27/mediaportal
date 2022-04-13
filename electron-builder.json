@@ -1,4 +1,7 @@
 {
+  "directories": {
+    "output": "./build/dist"
+  },
   "mac": {
     "icon": "./assets/icon.icns",
     "target": "dmg"
@@ -16,8 +19,8 @@
     ]
   },
   "files": [
-    "build/**/*",
     "assets/**/*",
-    "src/main/**/*"
+    "build/main/**/*",
+    "build/renderer/**/*"
   ]
 }

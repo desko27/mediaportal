@@ -1,4 +1,3 @@
-import React from 'react'
 import cx from 'clsx'
 import { FormattedMessage } from 'react-intl'
 
@@ -8,9 +7,20 @@ import UpdateButton from './UpdateButton'
 
 import styles from './index.module.css'
 
+interface Props {
+  checkedFiles: string[]
+  className: string
+  filesNumber: number
+  isUpdateAvailable: boolean
+  onMenuClick: () => void
+  onRemoveChecksClick: () => void
+  onRemoveChecksHover: (isHover: boolean) => void
+  performUpdate: () => void
+}
+
 const FLEX_SPACER = <div style={{ flexGrow: 1 }} />
 
-const Header = ({
+export default function Header ({
   checkedFiles,
   className,
   filesNumber,
@@ -19,8 +29,8 @@ const Header = ({
   onRemoveChecksClick,
   onRemoveChecksHover,
   performUpdate
-}) => {
-  const progressRatio = filesNumber && (checkedFiles.length / filesNumber)
+}: Props): JSX.Element {
+  const progressRatio = filesNumber !== 0 ? (checkedFiles.length / filesNumber) : 0
   const hasNotification = !!isUpdateAvailable
 
   return (
@@ -34,8 +44,8 @@ const Header = ({
         <XCircleIcon />
       </button>
       <span className={styles.filesInfo}>
-        {!!filesNumber && `${Math.round(progressRatio * 100)}% | `}
-        {filesNumber || '--'} <FormattedMessage id='header.files' />
+        {Boolean(filesNumber) && `${Math.round(progressRatio * 100)}% | `}
+        {filesNumber !== 0 ? filesNumber : '--'} <FormattedMessage id='header.files' />
       </span>
       {FLEX_SPACER}
       {isUpdateAvailable && <UpdateButton onClick={performUpdate} />}
@@ -48,5 +58,3 @@ const Header = ({
     </div>
   )
 }
-
-export default Header

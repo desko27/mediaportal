@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import type { MediaFile } from '@types'
+
+import { useState } from 'react'
 import cx from 'clsx'
 import { Draggable } from 'react-beautiful-dnd'
 
@@ -11,7 +13,17 @@ import { ReactComponent as CheckIcon } from './icons/check.svg'
 
 import styles from './index.module.css'
 
-const FileItem = ({
+interface Props {
+  file: MediaFile
+  index: number
+  isChecked: boolean
+  isSelected: boolean
+  onFileClick: (file: MediaFile) => void
+  onStateClick: (file: MediaFile) => void
+  willRemoveChecks: boolean
+}
+
+export default function FileItem ({
   file,
   index,
   isChecked,
@@ -19,21 +31,33 @@ const FileItem = ({
   onFileClick,
   onStateClick,
   willRemoveChecks
-}) => {
-  const [isFileButtonHover, setIsFileButtonHover] = useState()
-  const [isFileStateHover, setIsFileStateHover] = useState()
-  const [isFileTypeHover, setIsFileTypeHover] = useState()
+}: Props): JSX.Element {
+  const [isFileButtonHover, setIsFileButtonHover] = useState(false)
+  const [isFileStateHover, setIsFileStateHover] = useState(false)
+  const [isFileTypeHover, setIsFileTypeHover] = useState(false)
   const { name, type } = file
 
   const dotSplitedName = name.split('.')
   const hasExtension = dotSplitedName.length > 1
-  const [extension] = hasExtension && dotSplitedName.slice(-1)
-  const baseName = hasExtension ? dotSplitedName.slice(0, -1).join('.') : name
 
-  const handleStateClick = () => {
+  const handleStateClick = (): void => {
     onStateClick(file)
     setIsFileStateHover(false) // like if onMouseLeave happened
   }
+
+  const getBaseName = (): string => {
+    if (!hasExtension) return name
+    const everythingButLastSegment = dotSplitedName.slice(0, -1).join('.')
+    return everythingButLastSegment
+  }
+
+  const getExtension = (): string | null => {
+    if (!hasExtension) return null
+    const [lastSegment] = dotSplitedName.slice(-1)
+    return lastSegment
+  }
+
+  const extension = getExtension()
 
   return (
     <>
@@ -77,8 +101,8 @@ const FileItem = ({
                 {type === 'video' ? <FilmIcon /> : <ImageIcon />}
               </span>
               <span className={styles.fileButtonText}>
-                <span>{baseName}</span>
-                {extension &&
+                <span>{getBaseName()}</span>
+                {extension !== null &&
                   <span className={styles.fileButtonTextExtension}>.{extension}</span>}
               </span>
             </button>
@@ -89,5 +113,3 @@ const FileItem = ({
     </>
   )
 }
-
-export default FileItem

@@ -1,12 +1,12 @@
-const { Menu, protocol } = require('electron')
-const isDev = require('electron-is-dev')
+import { Menu, protocol } from 'electron'
+import isDev from 'electron-is-dev'
 
-module.exports.initialSetup = () => {
+export const initialSetup = (): void => {
   // remove browser's menu bar for production env
-  if (!isDev) Menu.setApplicationMenu(false)
+  if (!isDev) Menu.setApplicationMenu(null)
 }
 
-module.exports.readySetup = () => {
+export const readySetup = (): void => {
   protocol.registerFileProtocol('file', (request, callback) => {
     const pathname = decodeURI(request.url.replace('file:///', ''))
     callback(pathname)
