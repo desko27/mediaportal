@@ -1,4 +1,6 @@
-import React from 'react'
+
+import type { VideoState } from '../MediaDisplayer'
+
 import cx from 'clsx'
 import { FormattedMessage } from 'react-intl'
 
@@ -8,16 +10,22 @@ import { ReactComponent as PauseIcon } from './icons/pause.svg'
 
 import styles from './index.module.css'
 
-const getMinutesString = seconds => {
+interface Props {
+  className: string
+  sendAction: (type: string, ...args: unknown[]) => void
+  video?: VideoState
+}
+
+const getMinutesString = (seconds: number): string => {
   const minutes = Math.floor(seconds / 60)
   const restOfSeconds = `${Math.floor(seconds % 60)}`.padStart(2, '0')
   return `${minutes}:${restOfSeconds}`
 }
 
-const MediaControls = ({ className, sendAction, video }) => {
+export default function VideoControls ({ className, sendAction, video }: Props): JSX.Element {
   const baseClass = cx(styles.wrapper, className)
 
-  if (!video) {
+  if (typeof video === 'undefined') {
     return (
       <div className={baseClass}>
         <FormattedMessage id='media-controls.no-video-selected' />
@@ -25,7 +33,7 @@ const MediaControls = ({ className, sendAction, video }) => {
     )
   }
 
-  const handleElapsedTimeClick = ({ wantedRatio }) => {
+  const handleElapsedTimeClick = ({ wantedRatio }: { wantedRatio: number }): void => {
     sendAction('setElapsedRatio', wantedRatio)
   }
 
@@ -47,5 +55,3 @@ const MediaControls = ({ className, sendAction, video }) => {
     </div>
   )
 }
-
-export default MediaControls

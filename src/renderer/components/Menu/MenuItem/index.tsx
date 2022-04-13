@@ -1,16 +1,22 @@
-import React from 'react'
 import cx from 'clsx'
 
 import styles from './index.module.css'
 
-const noop = () => {}
+interface Props {
+  children: React.ReactNode
+  hasNotification?: boolean
+  isDisabled?: boolean
+  onClick?: () => void
+}
 
-const MenuItem = ({
+const noop = (): void => {}
+
+export default function MenuItem ({
   children,
-  hasNotification,
-  isDisabled,
+  hasNotification = false,
+  isDisabled = false,
   onClick = noop
-}) => {
+}: Props): JSX.Element {
   return (
     <button
       className={cx(
@@ -25,5 +31,3 @@ const MenuItem = ({
     </button>
   )
 }
-
-export default MenuItem

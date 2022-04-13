@@ -1,28 +1,32 @@
-import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
-import { DragDropContext } from 'react-beautiful-dnd'
+import type { IpcRendererEvent } from 'electron'
+import type { MediaFile } from '@types'
+import type { PortalState } from '../PortalRoute'
+
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 
 import { version } from '../../../../package.json'
 
 import Header from '../../components/Header'
 import Menu from '../../components/Menu'
 import FileList from '../../components/FileList'
-import MediaControls from '../../components/MediaControls'
+import VideoControls from '../../components/VideoControls'
 
 import styles from './index.module.css'
 
 const { ipcRenderer, shell } = window.electron
-const openUrl = url => shell.openExternal(url)
+const openUrl = (url: string): void => shell.openExternal(url)
 
-const performUpdate = () => openUrl('https://github.com/desko27/mediaportal/releases/latest')
+const performUpdate = (): void => openUrl('https://github.com/desko27/mediaportal/releases/latest')
 
-export default function ControlsRoute () {
-  const [isUpdateAvailable, setIsUpdateAvailable] = useState()
-  const [fileList, setFileList] = useState([])
-  const [checkedFiles, setCheckedFiles] = useState([])
-  const [currentFile, setCurrentFile] = useState()
-  const [portalState, setPortalState] = useState({})
-  const [willRemoveChecks, setWillRemoveChecks] = useState()
-  const [isMenuOpen, setIsMenuOpen] = useState()
+export default function ControlsRoute (): JSX.Element {
+  const [isUpdateAvailable, setIsUpdateAvailable] = useState(false)
+  const [fileList, setFileList] = useState<MediaFile[]>([])
+  const [checkedFiles, setCheckedFiles] = useState<string[]>([])
+  const [currentFile, setCurrentFile] = useState<MediaFile | null>(null)
+  const [portalState, setPortalState] = useState<PortalState>({})
+  const [willRemoveChecks, setWillRemoveChecks] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useLayoutEffect(() => {
     // show window when mounted
@@ -33,11 +37,11 @@ export default function ControlsRoute () {
   useEffect(() => {
     const githubApiLatestReleaseUrl =
       'https://api.github.com/repos/desko27/mediaportal/releases/latest'
-    const headers = new window.Headers({ Accept: 'application/vnd.github.v3+json' })
+    const headers = new window.Headers({ Accept: 'application/vnd.github.v3+json' }) as RequestInit
 
     window
       .fetch(githubApiLatestReleaseUrl, headers)
-      .then(res => res.json())
+      .then(async res => await res.json())
       .then(latestRelease => {
         const { tag_name: tagName } = latestRelease
         if (tagName === `v${version}`) return // we're up to date!
@@ -47,14 +51,15 @@ export default function ControlsRoute () {
   }, [])
 
   useEffect(() => {
-    const portalStateListener = (event, state) => setPortalState(state)
+    const portalStateListener =
+      (event: IpcRendererEvent, state: PortalState): void => setPortalState(state)
     ipcRenderer.on('portal-state-update', portalStateListener)
     return () => {
       ipcRenderer.removeListener('portal-state-update', portalStateListener)
     }
   }, [])
 
-  const handleFileClick = useCallback(file => {
+  const handleFileClick = useCallback((file: MediaFile): void => {
     const { id } = file
     ipcRenderer.send('portal-resource', file)
     setCurrentFile(file)
@@ -66,19 +71,22 @@ export default function ControlsRoute () {
   }, [])
 
   useEffect(() => {
-    const globalShortcutListener = (event, data) => {
+    const globalShortcutListener = (
+      event: IpcRendererEvent,
+      data: { type: string, payload: { number: number | string } }
+    ): void => {
       const { type, payload } = data
       switch (type) {
         case 'cast-resource': {
-          if (!fileList.length) break // can't cast resource with no resources
+          if (fileList.length === 0) break // can't cast resource with no resources
 
           switch (payload.number) {
             case 0:
               ipcRenderer.send('portal-resource', undefined)
-              setCurrentFile(undefined)
+              setCurrentFile(null)
               break
             case 'next': {
-              if (!checkedFiles.length) {
+              if (checkedFiles.length === 0) {
                 handleFileClick(fileList[0])
                 break
               }
@@ -92,7 +100,7 @@ export default function ControlsRoute () {
               break
             }
             default: {
-              const targetIndex = payload.number - 1
+              const targetIndex = +payload.number - 1
               if (targetIndex >= fileList.length) break
               handleFileClick(fileList[targetIndex])
               break
@@ -109,7 +117,7 @@ export default function ControlsRoute () {
     }
   }, [handleFileClick, fileList, checkedFiles])
 
-  const handleDropFiles = files => {
+  const handleDropFiles = (files: File[]): void => {
     const fileList = files.map(({ name, path, type: mimeType }) => {
       const [type] = mimeType.split('/')
       return { id: path, name, path, type }
@@ -119,23 +127,23 @@ export default function ControlsRoute () {
     // reset everything
     setCheckedFiles([])
     ipcRenderer.send('portal-resource', undefined)
-    setCurrentFile(undefined)
+    setCurrentFile(null)
 
     // set new file list
     setFileList(sortedFileList)
   }
 
-  const sendAction = (type, ...args) => {
+  const sendAction = (type: string, ...args: unknown[]): void => {
     ipcRenderer.send('portal-action', { type, args })
   }
 
-  const handleStateClick = file => {
+  const handleStateClick = (file: MediaFile): void => {
     const { id } = file
-    const isCurrent = currentFile && currentFile.id === id
+    const isCurrent = (currentFile != null) && currentFile.id === id
 
     if (isCurrent) {
       ipcRenderer.send('portal-resource', undefined)
-      setCurrentFile(undefined)
+      setCurrentFile(null)
       return
     }
 
@@ -146,18 +154,18 @@ export default function ControlsRoute () {
     })
   }
 
-  const handleRemoveChecksClick = () => setCheckedFiles(currentFile ? [currentFile.id] : [])
-  const handleRemoveChecksHover = isHover => setWillRemoveChecks(isHover)
+  const handleRemoveChecksClick = (): void => setCheckedFiles((currentFile != null) ? [currentFile.id] : [])
+  const handleRemoveChecksHover = (isHover: boolean): void => setWillRemoveChecks(isHover)
 
-  const onFileItemDragEnd = event => {
+  const onFileItemDragEnd = (event: DropResult): void => {
     const { draggableId, source, destination } = event
-    if (!destination) return
+    if (typeof destination === 'undefined') return
 
     setFileList(prev => {
       const fileListWithoutSource = prev.filter((_, index) => source.index !== index)
       return [
         ...fileListWithoutSource.slice(0, destination.index),
-        prev.find(file => file.id === draggableId),
+        prev.find(file => file.id === draggableId) as MediaFile,
         ...fileListWithoutSource.slice(destination.index)
       ]
     })
@@ -193,8 +201,8 @@ export default function ControlsRoute () {
           willRemoveChecks={willRemoveChecks}
         />
       </DragDropContext>
-      <MediaControls
-        className={styles.mediaControls}
+      <VideoControls
+        className={styles.videoControls}
         sendAction={sendAction}
         video={portalState.video}
       />
