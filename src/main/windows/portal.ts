@@ -1,7 +1,7 @@
 import { BrowserWindow } from 'electron'
 import { commonWindowOptions, getAppUrl } from './common'
 
-export const createPortalWindow = () => {
+export const createPortalWindow = (): Electron.BrowserWindow => {
   const window = new BrowserWindow({
     title: 'Portal',
     frame: false,
@@ -13,7 +13,7 @@ export const createPortalWindow = () => {
     ...commonWindowOptions
   })
 
-  window.loadURL(getAppUrl('portal'))
+  void window.loadURL(getAppUrl('portal'))
 
   return window
 }

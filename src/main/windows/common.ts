@@ -2,20 +2,20 @@ import { app } from 'electron'
 import isDev from 'electron-is-dev'
 import path from 'path'
 
-const webPreferences = {
+const webPreferences: Partial<Electron.BrowserWindowConstructorOptions['webPreferences']> = {
   nodeIntegration: true,
   webSecurity: false,
   preload: path.join(__dirname, 'preload.js'),
   autoplayPolicy: 'no-user-gesture-required'
 }
 
-module.exports.commonWindowOptions = {
+export const commonWindowOptions: Partial<Electron.BrowserWindowConstructorOptions> = {
   webPreferences,
   acceptFirstMouse: true,
   show: app.commandLine.hasSwitch('debug-mode')
 }
 
-module.exports.getAppUrl = (route) => {
+export const getAppUrl = (route: string): string => {
   return isDev
     ? `http://localhost:3000/#/${route}`
     /**

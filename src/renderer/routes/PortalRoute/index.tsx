@@ -1,13 +1,10 @@
 import type { IpcRendererEvent } from 'electron'
-import type { MediaFile, Displayer, VideoState } from '@types'
+import type { MediaFile, Displayer, VideoState, VideoAction } from '@types'
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import MediaDisplayer from '../../components/MediaDisplayer'
 
 import styles from './index.module.css'
-
-type VideoActionType = 'play' | 'pause' | 'setElapsedRatio'
-interface VideoAction {type: VideoActionType, args: unknown[]}
 
 const { ipcRenderer } = window.electron
 

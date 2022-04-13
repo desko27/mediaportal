@@ -23,3 +23,6 @@ export interface PortalState {
   resource?: { type: string }
   video?: VideoState
 }
+
+type VideoActionType = 'play' | 'pause' | 'setElapsedRatio'
+export interface VideoAction {type: VideoActionType, args: unknown[]}
