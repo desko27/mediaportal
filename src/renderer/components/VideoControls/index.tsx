@@ -2,7 +2,7 @@
 import type { VideoState } from '@types'
 
 import cx from 'clsx'
-import { FormattedMessage } from 'react-intl'
+import { useTranslation } from 'react-i18next'
 
 import ElapsedTimeBar from './ElapsedTimeBar'
 import { ReactComponent as PlayIcon } from './icons/play.svg'
@@ -23,12 +23,13 @@ const getMinutesString = (seconds: number): string => {
 }
 
 export default function VideoControls ({ className, sendAction, video }: Props): JSX.Element {
+  const { t } = useTranslation()
   const baseClass = cx(styles.wrapper, className)
 
   if (typeof video === 'undefined') {
     return (
       <div className={baseClass}>
-        <FormattedMessage id='media-controls.no-video-selected' />
+        {t('media-controls.no-video-selected')}
       </div>
     )
   }

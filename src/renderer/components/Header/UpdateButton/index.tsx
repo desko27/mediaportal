@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl'
+import { useTranslation } from 'react-i18next'
 
 import styles from './index.module.css'
 
@@ -7,9 +7,11 @@ interface Props {
 }
 
 export default function UpdateButton ({ onClick }: Props): JSX.Element {
+  const { t } = useTranslation()
+
   return (
     <button className={styles.wrapper} onClick={onClick}>
-      <FormattedMessage id='header.update' />
+      {t('header.update')}
     </button>
   )
 }

@@ -22,5 +22,7 @@ export const createControlsWindow = (
     window.webContents.openDevTools()
   }
 
+  window.focus()
+
   return window
 }
