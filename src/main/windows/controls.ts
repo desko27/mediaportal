@@ -20,9 +20,8 @@ export const createControlsWindow = (
 
   if (app.commandLine.hasSwitch('debug-mode')) {
     window.webContents.openDevTools()
+    window.focus() // even if react is not done, focus it
   }
-
-  window.focus()
 
   return window
 }

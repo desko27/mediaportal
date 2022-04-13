@@ -16,7 +16,10 @@ export const registerEvents = ({ controlsWindow, portalWindow }: Options): void 
 
   // only show when react render is ready
   ipcMain.once('portal-window-ready', () => portalWindow.show())
-  ipcMain.once('controls-window-ready', () => controlsWindow.show())
+  ipcMain.once('controls-window-ready', () => {
+    controlsWindow.show()
+    controlsWindow.focus()
+  })
 
   // redirect resource event from main window to portal window
   ipcMain.on('portal-resource', (event, file?: MediaFile) => {
