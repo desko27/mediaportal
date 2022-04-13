@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { shell } = window.electron
-const openUrl = (url: string): void => shell.openExternal(url)
+const openUrl = (url: string): void => { void shell.openExternal(url) }
 
 const FLEX_SPACER = <div style={{ flexGrow: 1, minHeight: 15 }} />
 const LINKS = {
