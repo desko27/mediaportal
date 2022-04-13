@@ -1,6 +1,6 @@
-const { app } = require('electron')
-const isDev = require('electron-is-dev')
-const path = require('path')
+import { app } from 'electron'
+import isDev from 'electron-is-dev'
+import path from 'path'
 
 const webPreferences = {
   nodeIntegration: true,
@@ -20,7 +20,7 @@ module.exports.getAppUrl = (route) => {
     ? `http://localhost:3000/#/${route}`
     /**
      * BE AWARE:
-     * __dirname === 'dist/mac/mediaportal.app/Contents/Resources/app/src/main/windows/'
+     * __dirname === 'build/dist/mac/mediaportal.app/Contents/Resources/app/build/main/windows/'
      */
-    : `file://${path.join(__dirname, '../../../build/index.html')}#/${route}`
+    : `file://${path.join(__dirname, '../../renderer/index.html')}#/${route}`
 }

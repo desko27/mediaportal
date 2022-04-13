@@ -1,10 +1,10 @@
-const { app } = require('electron')
+import { app } from 'electron'
 
-const { createControlsWindow } = require('./windows/controls')
-const { createPortalWindow } = require('./windows/portal')
-const { registerEvents } = require('./events')
-const { registerShortcuts } = require('./shortcuts')
-const { initialSetup, readySetup } = require('./setup')
+import { createControlsWindow } from './windows/controls'
+import { createPortalWindow } from './windows/portal'
+import { registerEvents } from './events'
+import { registerShortcuts } from './shortcuts'
+import { initialSetup, readySetup } from './setup'
 
 initialSetup()
 

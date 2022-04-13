@@ -1,7 +1,7 @@
-const { BrowserWindow } = require('electron')
-const { commonWindowOptions, getAppUrl } = require('./common')
+import { BrowserWindow } from 'electron'
+import { commonWindowOptions, getAppUrl } from './common'
 
-module.exports.createPortalWindow = () => {
+export const createPortalWindow = () => {
   const window = new BrowserWindow({
     title: 'Portal',
     frame: false,

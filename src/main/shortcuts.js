@@ -1,6 +1,6 @@
-const { globalShortcut } = require('electron')
+import { globalShortcut } from 'electron'
 
-module.exports.registerShortcuts = ({ controlsWindow }) => {
+export const registerShortcuts = ({ controlsWindow }) => {
   Array(10).fill().forEach((_, number) => {
     globalShortcut.register(`Alt+Shift+${number}`, () => {
       controlsWindow.webContents.send('global-shortcut', {

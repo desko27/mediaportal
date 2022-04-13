@@ -1,6 +1,6 @@
-const { ipcMain } = require('electron')
+import { ipcMain } from 'electron'
 
-module.exports.registerEvents = ({ controlsWindow, portalWindow }) => {
+export const registerEvents = ({ controlsWindow, portalWindow }) => {
   ipcMain.on('portal-fullscreen', (event, value) => {
     const newValue = value === 'toggle' ? !portalWindow.isFullScreen() : value
     portalWindow.setFullScreen(newValue)
