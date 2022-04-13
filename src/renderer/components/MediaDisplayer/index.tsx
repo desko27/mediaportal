@@ -4,14 +4,14 @@ import { useEffect, useRef } from 'react'
 
 import styles from './index.module.css'
 
-type VideoActionType =
-  'play' |
-  'pause' |
-  'setElapsedRatio'
+export interface Displayer {
+  video: {
+    play: () => Promise<void>
+    pause: () => void
+    setElapsedRatio: (ratio: number) => void
+  }
+}
 
-export interface VideoAction {type: VideoActionType, args: unknown[]}
-export type TriggerVideoAction = (action: VideoAction) => void
-export interface Displayer {triggerVideoAction: TriggerVideoAction}
 export type DisplayerRef = React.MutableRefObject<Displayer | null>
 export interface VideoState {
   elapsedTime: number
@@ -41,25 +41,22 @@ export default function MediaDisplayer ({
    */
   if (typeof displayerRef !== 'undefined') {
     displayerRef.current = {
-      triggerVideoAction (action) {
-        const video = videoRef.current
-        if (video === null) return
-
-        const { type, args } = action
-
-        // special managed actions
-        if (type === 'setElapsedRatio') {
-          const isSetElapsedRatioArgs = (args: unknown[]): args is [number] =>
-            args.length === 1 && typeof args[0] === 'number'
-          if (!isSetElapsedRatioArgs(args)) throw new Error('Bad arguments for `setElapsedRatio` video action')
-
-          const [wantedRatio] = args
+      video: {
+        setElapsedRatio (wantedRatio) {
+          const video = videoRef.current
+          if (video === null) return
           video.currentTime = wantedRatio * video.duration
-          return
+        },
+        async play () {
+          const video = videoRef.current
+          if (video === null) return
+          return await video.play()
+        },
+        pause () {
+          const video = videoRef.current
+          if (video === null) return
+          video.pause()
         }
-
-        // directly mirrored media element functions w/o arguments
-        void video[type]()
       }
     }
   }

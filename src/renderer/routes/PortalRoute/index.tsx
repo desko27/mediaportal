@@ -1,11 +1,14 @@
 import type { IpcRendererEvent } from 'electron'
 import type { MediaFile } from '@types'
-import type { Displayer, VideoAction, VideoState } from '../../components/MediaDisplayer'
+import type { Displayer, VideoState } from '../../components/MediaDisplayer'
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import MediaDisplayer from '../../components/MediaDisplayer'
 
 import styles from './index.module.css'
+
+type VideoActionType = 'play' | 'pause' | 'setElapsedRatio'
+interface VideoAction {type: VideoActionType, args: unknown[]}
 
 export interface PortalState {
   resource?: { type: string }
@@ -58,8 +61,18 @@ export default function PortalRoute (): JSX.Element {
     }
 
     const handleVideoAction = (event: IpcRendererEvent, action: VideoAction): void => {
-      if (displayerRef.current === null) return
-      displayerRef.current.triggerVideoAction(action)
+      const displayer = displayerRef.current
+      if (displayer === null) return
+
+      switch (action.type) {
+        case 'setElapsedRatio':
+          return displayer.video.setElapsedRatio(action.args[0] as number)
+        case 'play': {
+          void displayer.video.play()
+          return
+        }
+        case 'pause': return displayer.video.pause()
+      }
     }
 
     const handleKeydown = (event: KeyboardEvent): void => {
