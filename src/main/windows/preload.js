@@ -4,8 +4,11 @@ contextBridge.exposeInMainWorld('electron', {
     openExternal: url => shell.openExternal(url)
   },
   ipcRenderer: {
-    on: (...args) => ipcRenderer.on(...args),
     send: (...args) => ipcRenderer.send(...args),
-    removeListener: (...args) => ipcRenderer.removeListener(...args)
+    on: (...args) => {
+      ipcRenderer.on(...args)
+      const unsubscribe = () => { ipcRenderer.removeListener(...args) }
+      return unsubscribe
+    }
   }
 })

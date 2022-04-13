@@ -14,7 +14,7 @@ import VideoControls from '../../components/VideoControls'
 import styles from './index.module.css'
 
 const { ipcRenderer, shell } = window.electron
-const openUrl = (url: string): void => shell.openExternal(url)
+const openUrl = (url: string): void => { void shell.openExternal(url) }
 
 const performUpdate = (): void => openUrl('https://github.com/desko27/mediaportal/releases/latest')
 
@@ -52,9 +52,9 @@ export default function ControlsRoute (): JSX.Element {
   useEffect(() => {
     const portalStateListener =
       (event: IpcRendererEvent, state: PortalState): void => setPortalState(state)
-    ipcRenderer.on('portal-state-update', portalStateListener)
+    const unsubscribe = ipcRenderer.on('portal-state-update', portalStateListener)
     return () => {
-      ipcRenderer.removeListener('portal-state-update', portalStateListener)
+      unsubscribe()
     }
   }, [])
 
@@ -110,9 +110,9 @@ export default function ControlsRoute (): JSX.Element {
         default:
       }
     }
-    ipcRenderer.on('global-shortcut', globalShortcutListener)
+    const unsubscribe = ipcRenderer.on('global-shortcut', globalShortcutListener)
     return () => {
-      ipcRenderer.removeListener('global-shortcut', globalShortcutListener)
+      unsubscribe()
     }
   }, [handleFileClick, fileList, checkedFiles])
 

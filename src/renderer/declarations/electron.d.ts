@@ -1,7 +1,13 @@
-import { CrossProcessExports } from 'electron'
+import type { IpcRenderer, Shell } from 'electron'
 
 declare global {
   interface Window {
-    electron: CrossProcessExports
+    electron: {
+      ipcRenderer: {
+        send: IpcRenderer['send']
+        on: (...args: Parameters<IpcRenderer['on']>) => (() => void)
+      }
+      shell: Shell
+    }
   }
 }

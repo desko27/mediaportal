@@ -71,13 +71,13 @@ export default function PortalRoute (): JSX.Element {
       if (event.keyCode === KEYCODES.INTRO) ipcRenderer.send('portal-fullscreen', true)
     }
 
-    ipcRenderer.on('portal-resource', handlePortalResource)
-    ipcRenderer.on('portal-action', handleVideoAction)
+    const unsubscribePortalResource = ipcRenderer.on('portal-resource', handlePortalResource)
+    const unsubscribePortalAction = ipcRenderer.on('portal-action', handleVideoAction)
     document.addEventListener('keydown', handleKeydown)
 
     return () => {
-      ipcRenderer.removeListener('portal-resource', handlePortalResource)
-      ipcRenderer.removeListener('portal-action', handleVideoAction)
+      unsubscribePortalResource()
+      unsubscribePortalAction()
       document.removeEventListener('keydown', handleKeydown)
     }
   }, [])
