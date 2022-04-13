@@ -83,9 +83,11 @@ export default function MediaDisplayer ({
   const renderMedia = (): React.ReactNode => {
     if (file === null) return null
 
-    const { name, type, path } = file
+    const { name, type, path, hash } = file
     const hasPath = typeof path === 'string' && path.length > 0
-    const webPath = hasPath ? `file://${path}` : undefined
+
+    // Note: hash prevents old cache from being used for new files under the same path
+    const webPath = hasPath ? `file://${path}?hash=${hash}` : undefined
 
     const videoNode = (
       <video ref={videoRef} muted={isMuted}>

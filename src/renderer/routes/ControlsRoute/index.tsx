@@ -119,8 +119,15 @@ export default function ControlsRoute (): JSX.Element {
   const handleDropFiles = (files: File[]): void => {
     const fileList = files.map(({ name, path, type: mimeType }) => {
       const [type] = mimeType.split('/')
-      return { id: path, name, path, type }
+      return {
+        id: path,
+        name,
+        path,
+        type,
+        hash: crypto.randomUUID()
+      }
     })
+
     const sortedFileList = fileList.sort((a, b) => a.name.localeCompare(b.name))
 
     // reset everything
@@ -156,7 +163,7 @@ export default function ControlsRoute (): JSX.Element {
   const handleRemoveChecksClick = (): void => setCheckedFiles((currentFile != null) ? [currentFile.id] : [])
   const handleRemoveChecksHover = (isHover: boolean): void => setWillRemoveChecks(isHover)
 
-  const onFileItemDragEnd = (event: DropResult): void => {
+  const handleFileItemDragEnd = (event: DropResult): void => {
     const { draggableId, source, destination } = event
     if (typeof destination === 'undefined') return
 
@@ -188,7 +195,7 @@ export default function ControlsRoute (): JSX.Element {
         performUpdate={performUpdate}
         setIsOpen={setIsMenuOpen}
       />
-      <DragDropContext onDragEnd={onFileItemDragEnd}>
+      <DragDropContext onDragEnd={handleFileItemDragEnd}>
         <FileList
           checkedFiles={checkedFiles}
           className={styles.fileList}
