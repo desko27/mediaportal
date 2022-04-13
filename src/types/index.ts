@@ -3,6 +3,7 @@ export interface MediaFile {
   name: string
   path: string
   type: string
+  hash: string
 }
 
 export interface Displayer {
