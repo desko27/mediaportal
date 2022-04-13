@@ -1,5 +1,5 @@
 import cx from 'clsx'
-import { FormattedMessage } from 'react-intl'
+import { useTranslation } from 'react-i18next'
 
 import { ReactComponent as XCircleIcon } from './icons/x-circle.svg'
 import { ReactComponent as MenuIcon } from './icons/menu.svg'
@@ -30,6 +30,7 @@ export default function Header ({
   onRemoveChecksHover,
   performUpdate
 }: Props): JSX.Element {
+  const { t } = useTranslation()
   const progressRatio = filesNumber !== 0 ? (checkedFiles.length / filesNumber) : 0
   const hasNotification = !!isUpdateAvailable
 
@@ -45,7 +46,7 @@ export default function Header ({
       </button>
       <span className={styles.filesInfo}>
         {Boolean(filesNumber) && `${Math.round(progressRatio * 100)}% | `}
-        {filesNumber !== 0 ? filesNumber : '--'} <FormattedMessage id='header.files' />
+        {filesNumber !== 0 ? filesNumber : '--'} {t('header.files')}
       </span>
       {FLEX_SPACER}
       {isUpdateAvailable && <UpdateButton onClick={performUpdate} />}

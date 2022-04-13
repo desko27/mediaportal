@@ -1,0 +1,16 @@
+{
+  "header": {
+    "files": "arquivos",
+    "update": "¡atualização!"
+  },
+  "menu": {
+    "download-update": "Baixar atualização",
+    "see-user-manual": "Ver instruções",
+    "source-code": "Código fonte",
+    "report-issue": "Reportar erro",
+    "send-feedback": "Enviar comentários"
+  },
+  "media-controls": {
+    "no-video-selected": "Nenhum vídeo selecionado"
+  }
+}

@@ -1,5 +1,5 @@
 import cx from 'clsx'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { useTranslation } from 'react-i18next'
 import { version } from '../../../../package.json'
 
 import MenuItem from './MenuItem'
@@ -32,27 +32,27 @@ export default function Menu ({
   performUpdate,
   setIsOpen
 }: Props): JSX.Element {
-  const { locale } = useIntl()
+  const { t, i18n } = useTranslation()
   return (
     <div className={cx(styles.wrapper, isOpen && styles.isOpen)}>
       <div className={styles.overlay} onClick={() => setIsOpen(false)} />
       <div className={styles.menu}>
         {isUpdateAvailable && (
           <MenuItem hasNotification onClick={performUpdate}>
-            <FormattedMessage id='menu.download-update' />
+            {t('menu.download-update')}
           </MenuItem>
         )}
-        <MenuItem onClick={() => openUrl(LINKS.USER_MANUAL(locale))}>
-          <FormattedMessage id='menu.see-user-manual' />
+        <MenuItem onClick={() => openUrl(LINKS.USER_MANUAL(i18n.language))}>
+          {t('menu.see-user-manual')}
         </MenuItem>
         <MenuItem onClick={() => openUrl(LINKS.SOURCE_CODE)}>
-          <FormattedMessage id='menu.source-code' />
+          {t('menu.source-code')}
         </MenuItem>
         <MenuItem onClick={() => openUrl(LINKS.REPORT_ISSUE)}>
-          <FormattedMessage id='menu.report-issue' />
+          {t('menu.report-issue')}
         </MenuItem>
         <MenuItem onClick={() => openUrl(LINKS.SEND_FEEDBACK)}>
-          <FormattedMessage id='menu.send-feedback' />
+          {t('menu.send-feedback')}
         </MenuItem>
         {FLEX_SPACER}
         <MenuItem isDisabled>v{version}</MenuItem>

@@ -1,0 +1,16 @@
+{
+  "header": {
+    "files": "files",
+    "update": "update!"
+  },
+  "menu": {
+    "download-update": "Download update",
+    "see-user-manual": "See user manual",
+    "source-code": "Source code",
+    "report-issue": "Report an issue",
+    "send-feedback": "Send feedback"
+  },
+  "media-controls": {
+    "no-video-selected": "No video selected"
+  }
+}
