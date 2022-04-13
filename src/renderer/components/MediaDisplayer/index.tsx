@@ -1,23 +1,10 @@
-import type { MediaFile } from '@types'
+import type { MediaFile, Displayer, VideoState } from '@types'
 
 import { useEffect, useRef } from 'react'
 
 import styles from './index.module.css'
 
-export interface Displayer {
-  video: {
-    play: () => Promise<void>
-    pause: () => void
-    setElapsedRatio: (ratio: number) => void
-  }
-}
-
 export type DisplayerRef = React.MutableRefObject<Displayer | null>
-export interface VideoState {
-  elapsedTime: number
-  elapsedRatio: number
-  isPaused: boolean
-}
 
 interface Props {
   displayerRef?: DisplayerRef

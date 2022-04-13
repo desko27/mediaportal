@@ -1,5 +1,5 @@
 
-import type { VideoState } from '../MediaDisplayer'
+import type { VideoState } from '@types'
 
 import cx from 'clsx'
 import { FormattedMessage } from 'react-intl'

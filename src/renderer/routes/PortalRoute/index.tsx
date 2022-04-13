@@ -1,6 +1,5 @@
 import type { IpcRendererEvent } from 'electron'
-import type { MediaFile } from '@types'
-import type { Displayer, VideoState } from '../../components/MediaDisplayer'
+import type { MediaFile, Displayer, VideoState } from '@types'
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import MediaDisplayer from '../../components/MediaDisplayer'
@@ -9,11 +8,6 @@ import styles from './index.module.css'
 
 type VideoActionType = 'play' | 'pause' | 'setElapsedRatio'
 interface VideoAction {type: VideoActionType, args: unknown[]}
-
-export interface PortalState {
-  resource?: { type: string }
-  video?: VideoState
-}
 
 const { ipcRenderer } = window.electron
 

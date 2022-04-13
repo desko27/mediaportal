@@ -1,6 +1,5 @@
 import type { IpcRendererEvent } from 'electron'
-import type { MediaFile } from '@types'
-import type { PortalState } from '../PortalRoute'
+import type { MediaFile, PortalState } from '@types'
 
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
