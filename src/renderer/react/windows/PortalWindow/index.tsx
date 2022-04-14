@@ -2,7 +2,7 @@ import type { IpcRendererEvent } from 'electron'
 import type { MediaFile, Displayer, VideoState, VideoAction } from '@types'
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import MediaDisplayer from '../../components/MediaDisplayer'
+import MediaDisplayer from '@components/MediaDisplayer'
 
 import styles from './index.module.css'
 
@@ -10,7 +10,7 @@ const { ipcRenderer } = window.electron
 
 const KEYCODES = { ESCAPE: 27, INTRO: 13 }
 
-export default function PortalRoute (): JSX.Element {
+export default function PortalWindow (): JSX.Element {
   const [currentFile, setCurrentFile] = useState<MediaFile | null>(null)
   const currentFileRef = useRef<MediaFile | null>(null)
   const displayerRef = useRef<Displayer | null>(null)
