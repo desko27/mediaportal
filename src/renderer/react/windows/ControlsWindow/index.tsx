@@ -4,12 +4,12 @@ import type { MediaFile, PortalState } from '@types'
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 
-import { version } from '../../../../package.json'
+import { version } from '../../../../../package.json'
 
-import Header from '../../components/Header'
-import Menu from '../../components/Menu'
-import FileList from '../../components/FileList'
-import VideoControls from '../../components/VideoControls'
+import Header from './Header'
+import Menu from './Menu'
+import FileList from './FileList'
+import VideoControls from './VideoControls'
 
 import styles from './index.module.css'
 
@@ -18,7 +18,7 @@ const openUrl = (url: string): void => { void shell.openExternal(url) }
 
 const performUpdate = (): void => openUrl('https://github.com/desko27/mediaportal/releases/latest')
 
-export default function ControlsRoute (): JSX.Element {
+export default function ControlsWindow (): JSX.Element {
   const [isUpdateAvailable, setIsUpdateAvailable] = useState(false)
   const [fileList, setFileList] = useState<MediaFile[]>([])
   const [checkedFiles, setCheckedFiles] = useState<string[]>([])

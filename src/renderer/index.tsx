@@ -1,8 +1,10 @@
 import { createRoot } from 'react-dom/client'
-import App from './App'
-import './vars.css'
-import './index.css'
+
+import './styles/colors.css'
+import './styles/global.css'
+
+import ReactApp from './react/ReactApp'
 
 const rootElement = document.getElementById('root')
 const root = createRoot(rootElement as HTMLElement)
-root.render(<App />)
+root.render(<ReactApp />)

@@ -1,6 +1,6 @@
 import type { MediaFile } from '@types'
 
-import MediaDisplayer from '../../MediaDisplayer'
+import MediaDisplayer from '@components/MediaDisplayer'
 
 import styles from './index.module.css'
 
